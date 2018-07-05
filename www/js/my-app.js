@@ -1,7 +1,7 @@
 // Initialize your app
 var myApp = new Framework7({
     // Default title for modals
-    modalTitle: 'Aptohome',
+    modalTitle: 'Carneiros',
     tapHold: true,
     tapHoldPreventClicks: true,
      // Enable Material theme
@@ -509,7 +509,7 @@ $$('#entrar').on('click', function(){
     
     myApp.showIndicator();
 
-        //onDeviceReady();
+        onDeviceReady();
 
         $.ajax({
             url: $$url,
@@ -557,7 +557,7 @@ $$('#entrar').on('click', function(){
                         }
                     }else{
                         myApp.hideIndicator();
-                        myApp.alert('Condomínio bloqueado! Favor entrar em contato com o Aptohome.', 'Aptohome');
+                        myApp.alert('Condomínio bloqueado! Favor entrar em contato com o Aptohome.');
                         block=1;
                     }
                 });
@@ -681,7 +681,7 @@ $$('#entrar').on('click', function(){
                         }
                     }else{
                         myApp.hideIndicator();
-                        myApp.alert('Condomínio bloqueado! Favor entrar em contato com o Aptohome.', 'Aptohome'); 
+                        myApp.alert('Condomínio bloqueado! Favor entrar em contato com o Aptohome.'); 
                     }
                 });
             } else if (data.login.sindico) {
@@ -873,12 +873,12 @@ $$('#entrar').on('click', function(){
                         }
                     }else{
                         myApp.hideIndicator();
-                        myApp.alert('Condomínio bloqueado! Favor entrar em contato com o Aptohome.', 'Aptohome');    
+                        myApp.alert('Condomínio bloqueado! Favor entrar em contato com o Aptohome.');    
                     }
                 });
             } else {
                 myApp.hideIndicator();
-                myApp.alert('E-mail e/ou senha inválidos!', 'Aptohome');
+                myApp.alert('E-mail e/ou senha inválidos!');
             }
 
             // chama desabilitar modulos //
@@ -887,7 +887,7 @@ $$('#entrar').on('click', function(){
         }
          ,error:function(data){
             myApp.hideIndicator();
-            myApp.alert('E-mail e/ou senha inválidos!', 'Aptohome');
+            myApp.alert('E-mail e/ou senha inválidos!');
          }
         });
 
@@ -903,14 +903,14 @@ $$('#esqueceu').on('click', function(){
         data: "action=esqueceu&txtEmailEsqueceu="+$$email,
     })
       .fail(function() {
-        myApp.alert('Email não cadastrado.', 'Aptohome');
+        myApp.alert('Email não cadastrado.');
       })     
       .done(function(data) {
             if (data=="ok") {
-                myApp.alert('Email de recuperação de senha, enviado com sucesso!', 'Aptohome');
+                myApp.alert('Email de recuperação de senha, enviado com sucesso!');
                 myApp.closeModal(".popup-esqueceu");
             } else {
-                myApp.alert('Email não cadastrado.', 'Aptohome');
+                myApp.alert('Email não cadastrado.');
             }
       });
 });
@@ -924,10 +924,9 @@ function atualizartoken(data){
             data: "action=token&token="+localStorage.getItem("token")+"&plataform="+device.platform+"&guid="+localStorage.getItem("guid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
-            //myApp.alert('Sucesso!', 'Rádio 93 FM');
             console.log("Token gravado: "+localStorage.getItem("token"));
         });
     }, 5000);
@@ -942,10 +941,10 @@ function atualizartokenSindico(data){
             data: "action=token&token="+localStorage.getItem("token")+"&plataform="+device.platform+"&guid="+localStorage.getItem("sindicoGuid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
-            //myApp.alert('Sucesso!', 'Rádio 93 FM');
+
             console.log("Token gravado: "+localStorage.getItem("token"));
         });
     }, 5000);
@@ -960,10 +959,10 @@ function atualizartokenAdministradora(data){
             data: "action=token&token="+localStorage.getItem("token")+"&plataform="+device.platform+"&guid="+localStorage.getItem("administradoraGuid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
-            //myApp.alert('Sucesso!', 'Rádio 93 FM');
+
             console.log("Token gravado: "+localStorage.getItem("token"));
         });
     }, 5000);
@@ -978,10 +977,10 @@ function atualizartokenPortaria(data){
             data: "action=token&token="+localStorage.getItem("token")+"&plataform="+device.platform+"&guid="+localStorage.getItem("guid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
-            //myApp.alert('Sucesso!', 'Rádio 93 FM');
+
             console.log("Token gravado: "+data);
         });
     }, 5000);
@@ -1027,7 +1026,7 @@ function atualizartokenSair(data){
             data: "action=tokenSair&token=&guid="+localStorage.getItem("guid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
             console.log("Token sair gravado: "+localStorage.getItem("token"));
@@ -1044,7 +1043,7 @@ function atualizartokenSindicoSair(data){
             data: "action=tokenSair&token=&guid="+localStorage.getItem("sindicoGuid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
             console.log("Token sair gravado: "+localStorage.getItem("token"));
@@ -1061,7 +1060,7 @@ function atualizartokenAdministradoraSair(data){
             data: "action=tokenSair&token=&guid="+localStorage.getItem("administradoraGuid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
             console.log("Token sair gravado: "+localStorage.getItem("token"));
@@ -1078,7 +1077,7 @@ function atualizartokenPortariaSair(data){
             data: "action=tokenSair&token=&guid="+localStorage.getItem("guid"),
         })
         .fail(function() {
-        //myApp.alert('Erro! Tente novamente.', 'Aptohome');
+
         })     
         .done(function(data) {
             console.log("Token sair gravado: "+data);
@@ -1342,7 +1341,7 @@ function modulos(){
                     }
                 myApp.hideIndicator();
                 }else{
-                    myApp.alert('Erro de conexão com o servidor! O App será fechado.', 'Aptohome');
+                    myApp.alert('Erro de conexão com o servidor! O App será fechado.');
                     navigator.app.exitApp();
                 }
             }
@@ -1375,7 +1374,6 @@ function profile(){
     atualizartoken(localStorage.getItem("token"));
         //popupBanner();
         //mainView.router.loadPage("bannercont");
-        //myApp.alert('Morador editado om sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'bannercont'});popupBanner();});
 }
 
 //////////////////////////// profile sindico /////////////////////////////
@@ -1414,7 +1412,6 @@ function profileSindico(){
 
     atualizartokenSindico(localStorage.getItem("token"));
         //mainView.router.loadPage("bannercont");
-        //myApp.alert('Morador editado om sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'bannercont'});popupBanner();});
 }
 
 ///////////////// lista os condomínio dos síndicos ou administradoras /////////////
@@ -1453,7 +1450,7 @@ function updateCond(id,push){
         },error: function(data) {
             myApp.hideIndicator();
             //console.log(data);
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
         }
     });
 
@@ -1489,7 +1486,6 @@ function profileAdministradora(){
 
     atualizartokenAdministradora(localStorage.getItem("token"));
         //mainView.router.loadPage("bannercont");
-        //myApp.alert('Morador editado om sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'bannercont'});popupBanner();});
 }
 
 function listCondAdministradora(){
@@ -1526,7 +1522,7 @@ function updateCondAdministradora(id,push){
         },error: function(data) {
             myApp.hideIndicator();
             //console.log(data);
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
         }
     });
 
@@ -1570,7 +1566,6 @@ function profilePortaria(){
     atualizartokenPortaria(localStorage.getItem("token"));
         //popupBanner();
         //mainView.router.loadPage("bannercont");
-        //myApp.alert('Morador editado om sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'bannercont'});popupBanner();});
 }
 
 
@@ -2049,7 +2044,7 @@ $$('.edit_profile').on('click', function(){
         }
          ,error:function(data){
             myApp.hideIndicator();
-            myApp.alert('Erro! Favor tentar novamente.', 'Aptohome');
+            myApp.alert('Erro! Favor tentar novamente.');
          }
         });
 
@@ -2147,7 +2142,7 @@ $('#buteditprofile').on('click', function(){
             enviarprofile();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 });
 
@@ -2251,12 +2246,12 @@ if (indexofImage!="-1") {
                 }
                 
                 myApp.hideIndicator();
-                myApp.alert('Usuário editado om sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'index'});});
+                myApp.alert('Usuário editado om sucesso!', function () { mainView.router.load({pageName: 'index'});});
             });
         }
          ,error:function(data){
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
          }
         });
 
@@ -2286,7 +2281,7 @@ function popupBanner(){
             },error: function(data) {
                 myApp.hideIndicator();
                 //console.log(data);
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -2312,7 +2307,6 @@ function camerasdeseguranca(){
              ,error:function(data){
                 myApp.hideIndicator();
                 $('#camerasdeseguranca-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
              }
         });
     //alert("Entrei");
@@ -2391,7 +2385,6 @@ function pagamentos(){
             },error: function(data) {
                 myApp.hideIndicator();
                 $('#pagamentos-cont').html("<li class='semregistro'>Você não tem nunhuma negociação de débito em aberto. Pra solicitar uma negociação entre em contato com o Síndico ou Administradora.</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     //alert("Entrei");
@@ -2447,7 +2440,6 @@ function pagamentoscont(idpagamentos){
             },error: function(data) {
                 myApp.hideIndicator();
                 $('#pagamentoscont-cont').html("<li class='semregistro'>Você não tem nunhuma negociação de débito. Pra solicitar uma negociação entre em contato com o Síndico.</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     //alert("Entrei");
@@ -2601,7 +2593,7 @@ $('#butinserirpagamentos').on('click', function(){
             enviarpagamentos();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 });
 
@@ -2639,7 +2631,7 @@ function enviarpagamentos()
         })
           .fail(function() {
             myApp.hidePreloader();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             $('#formCard').each (function(){
@@ -2647,10 +2639,10 @@ function enviarpagamentos()
             });
             if (data!="ok") {
                 myApp.hidePreloader();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hidePreloader();
-                myApp.alert('Pagamento realizado com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'pagamentos'}); pagamentos();});
+                myApp.alert('Pagamento realizado com sucesso!', function () { mainView.router.load({pageName: 'pagamentos'}); pagamentos();});
             }
           });
 }
@@ -2758,7 +2750,6 @@ function muraldeanuncios(){
              ,error:function(data){
                 myApp.hideIndicator();
                 $('#muraldeanuncios-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
              }
         });
 }
@@ -2775,7 +2766,7 @@ function delanuncio(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-anuncio').eq($("li.swipeout-anuncio[data-index="+eq+"]").index()));
@@ -2784,7 +2775,7 @@ function delanuncio(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -2853,7 +2844,7 @@ function muraldeanuncioscont(id){
             }
              ,error:function(data){
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
              }
         });
 }
@@ -2982,7 +2973,7 @@ $('#butinseriranuncios').on('click', function(){
             enviaranuncios();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 });
 
@@ -3015,15 +3006,15 @@ function enviaranuncios()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Anúncio inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'muraldeanuncios'}); muraldeanuncios();});
+                myApp.alert('Anúncio inserido com sucesso!', function () { mainView.router.load({pageName: 'muraldeanuncios'}); muraldeanuncios();});
             }
           });
 }
@@ -3038,7 +3029,7 @@ $('#butinseriralertaportaria').on('click', function(){
             enviaralertaportaria();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 });
 
@@ -3064,15 +3055,15 @@ function enviaralertaportaria()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Alerta inserido com sucesso!', 'Aptohome', function () { window.location = "index.html";});
+                myApp.alert('Alerta inserido com sucesso!', function () { window.location = "index.html";});
             }
           });
 }
@@ -3187,7 +3178,6 @@ function livroocorrencias(){
         },error:function(data){
             myApp.hideIndicator();
             $('#ocorrencias-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-            //myApp.alert('Erro! Tente novamente.', 'Aptohome');
          }
     });
 }
@@ -3204,17 +3194,16 @@ function delocorrencia(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 console.log($("li.swipeout-ocorrencia[data-index="+eq+"]").index());
                 myApp.swipeoutDelete($$('li.swipeout-ocorrencia').eq($("li.swipeout-ocorrencia[data-index="+eq+"]").index()));
-                //myApp.swipeoutDelete($$('li.swipeout-ocorrencia').eq(eq));
             }
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -3362,7 +3351,6 @@ function livroocorrenciascont(id,push){
 
             },error: function(data) {
                 //myApp.hideIndicator();
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
 
@@ -3440,7 +3428,7 @@ function inserirocorrencias(){
                 myApp.hideIndicator(); 
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro ao carregar dados, tente novamente!', 'Aptohome', function () { mainView.router.load({pageName: 'livroocorrencias'}); livroocorrencias();});
+                myApp.alert('Erro ao carregar dados, tente novamente!', function () { mainView.router.load({pageName: 'livroocorrencias'}); livroocorrencias();});
             }
         });
 }
@@ -3534,7 +3522,7 @@ $('#butinserirocorrencias').on('click', function(){
             enviarocorrencias();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 });
 
@@ -3567,7 +3555,7 @@ $$('#pdfFileOcorrencias').on('change', function (e) {
           myApp.hideIndicator();
         }
     }else{
-        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.', 'Aptohome');
+        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.');
     }
 
 });
@@ -3599,19 +3587,19 @@ function enviarocorrencias()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if (data!="ok") {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
                     $('#forminserirocorrencias').each (function(){
                       this.reset();
                     });
                     $('input[type=hidden]').val("");
-                    myApp.alert('Ocorrência inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'livroocorrencias'}); livroocorrencias();});
+                    myApp.alert('Ocorrência inserida com sucesso!', function () { mainView.router.load({pageName: 'livroocorrencias'}); livroocorrencias();});
                 }
               });
 
@@ -3624,12 +3612,12 @@ function enviarocorrencias()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if (data!="ok") {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -3638,7 +3626,7 @@ function enviarocorrencias()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Ocorrência inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'livroocorrencias'}); livroocorrencias();});
+                    myApp.alert('Ocorrência inserida com sucesso!', function () { mainView.router.load({pageName: 'livroocorrencias'}); livroocorrencias();});
                 }
               });
         }
@@ -3691,10 +3679,12 @@ function transparenciadecontastipo(){
                         $$(".docsdiversos").removeClass("invisivel");
                 }
             }
-            if ($(".docstipo ul li:visible").length==1) {
-                //console.log("100%");
-                $(".docstipo ul li:visible").attr("style","width:100%");
-            }
+            setTimeout(function () {
+                if ($(".docstipo ul li:visible").length==1) {
+                    console.log("100%");
+                    $(".docstipo ul li:visible").attr("style","width:100%");
+                }
+            }, 2000);
         myApp.hideIndicator();
         }
     });
@@ -3776,7 +3766,6 @@ function transparenciadecontas(idTipo){
             },error: function(data) {
                 myApp.hideIndicator();
                 $('#transparenciadecontas-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     //alert("Entrei");
@@ -3795,7 +3784,7 @@ function deltransparencia(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-transparencia').eq($("li.swipeout-transparencia[data-index="+eq+"]").index()));
@@ -3804,7 +3793,7 @@ function deltransparencia(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -3877,7 +3866,7 @@ function transparenciadecontascont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -3964,12 +3953,12 @@ myApp.onPageInit('inserirtransparenciadecontas', function (page) {
 $('#butinserirtransparencia').on('click', function(){
     //alert("enviar");
 
-    if (($$('#txttit').val()!="") &&  ($$('#txtdescricao').val()!="")) {
+    if (($$('#txtidtipotrans').val()!="") && ($$('#txttittrans').val()!="") &&  ($$('#txtdescricaotrans').val()!="")) {
 
             enviartransparencia();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -4003,7 +3992,7 @@ $$('#pdfFileTransparencia').on('change', function (e) {
           
         }
     }else{
-        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.', 'Aptohome');
+        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.');
         myApp.hideIndicator();
     }
 
@@ -4022,8 +4011,9 @@ function enviartransparencia()
         }else{
             $$idadministradora = null;
         }
-        $$txtTitulo = $$('#txttit').val();
-        $$txtDescricao = $$('#txtdescricao').val();
+        $$txtIdTipo = $$('#txtidtipotrans').val();
+        $$txtTitulo = $$('#txttittrans').val();
+        $$txtDescricao = $$('#txtdescricaotrans').val();
         //$$pdfFileTransparencia = $$('#pdfFileTransparencia').val();
         //$$fileUpload = dataURL;
         //$$fileUpload = "fterte";
@@ -4039,16 +4029,16 @@ function enviartransparencia()
             // Salvando imagem no servidor
             $.ajax($server+'functionAppTransparencia.php?', {
                 type: "post",
-                data: "imagem="+imagem+"&idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&idadministradora="+$$idadministradora+"&txtTitulo="+$$txtTitulo+"&txtDescricao="+$$txtDescricao+"&action=add",
+                data: "imagem="+imagem+"&idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&idadministradora="+$$idadministradora+"&txtIdTipo="+$$txtIdTipo+"&txtTitulo="+$$txtTitulo+"&txtDescricao="+$$txtDescricao+"&action=add",
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -4057,7 +4047,7 @@ function enviartransparencia()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Transparência inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'transparenciadecontas'}); transparenciadecontas();});
+                    myApp.alert('Transparência inserida com sucesso!', function () { mainView.router.load({pageName: 'transparenciadecontastipo'}); transparenciadecontastipo();});
                 }
               });
         }else{
@@ -4068,16 +4058,16 @@ function enviartransparencia()
                 processData: false,
                 contentType: false,
                 cache: false,
-                data: "pdf="+$$pdfFileTransparencia+"&idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&idadministradora="+$$idadministradora+"&txtTitulo="+$$txtTitulo+"&txtDescricao="+$$txtDescricao+"&action=add",
+                data: "pdf="+$$pdfFileTransparencia+"&idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&idadministradora="+$$idadministradora+"&txtIdTipo="+$$txtIdTipo+"&txtTitulo="+$$txtTitulo+"&txtDescricao="+$$txtDescricao+"&action=add",
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -4086,7 +4076,7 @@ function enviartransparencia()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Transparência inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'transparenciadecontas'}); transparenciadecontas();});
+                    myApp.alert('Transparência inserida com sucesso!', function () { mainView.router.load({pageName: 'transparenciadecontastipo'}); transparenciadecontastipo();});
                 }
               });
 
@@ -4165,7 +4155,6 @@ function enquetes(){
             },error: function(data) {
                 myApp.hideIndicator();
                 $('#enquetes-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     //alert("Entrei");
@@ -4184,7 +4173,7 @@ function delservico(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-servico').eq($("li.swipeout-servico[data-index="+eq+"]").index()));
@@ -4193,7 +4182,7 @@ function delservico(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -4266,7 +4255,7 @@ function servicocont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -4358,7 +4347,7 @@ $('#butinserirservico').on('click', function(){
             enviarservico();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -4392,15 +4381,15 @@ function enviarservico()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Serviço inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'servico'}); servico();});
+                myApp.alert('Serviço inserido com sucesso!', function () { mainView.router.load({pageName: 'servico'}); servico();});
             }
           });
 }
@@ -4478,7 +4467,6 @@ function servico(){
             },error: function(data) {
                 myApp.hideIndicator();
                 $('#servico-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     //alert("Entrei");
@@ -4497,7 +4485,7 @@ function delservico(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-servico').eq($("li.swipeout-servico[data-index="+eq+"]").index()));
@@ -4506,7 +4494,7 @@ function delservico(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -4579,7 +4567,7 @@ function servicocont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -4671,7 +4659,7 @@ $('#butinserirservico').on('click', function(){
             enviarservico();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -4705,15 +4693,15 @@ function enviarservico()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Serviço inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'servico'}); servico();});
+                myApp.alert('Serviço inserido com sucesso!', function () { mainView.router.load({pageName: 'servico'}); servico();});
             }
           });
 }
@@ -4830,7 +4818,7 @@ function delcronograma(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-cronograma').eq($("li.swipeout-cronograma[data-index="+eq+"]").index()));
@@ -4839,7 +4827,7 @@ function delcronograma(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -4912,7 +4900,7 @@ function cronogramacont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -5004,7 +4992,7 @@ $('#butinserircronograma').on('click', function(){
             enviarcronograma();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -5038,15 +5026,15 @@ function enviarcronograma()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Equipe inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'cronograma'}); cronograma();});
+                myApp.alert('Equipe inserida com sucesso!', function () { mainView.router.load({pageName: 'cronograma'}); cronograma();});
             }
           });
 }
@@ -5153,7 +5141,7 @@ function delmorador(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-morador').eq($("li.swipeout-morador[data-index="+eq+"]").index()));
@@ -5162,7 +5150,7 @@ function delmorador(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -5221,7 +5209,7 @@ function moradorcont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -5313,7 +5301,7 @@ $('#butinseriraddmorador').on('click', function(){
             enviaraddmorador();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -5347,18 +5335,18 @@ function enviaraddmorador()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data=="ok") {
                myApp.hideIndicator();
-                myApp.alert('Morador inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'morador'}); morador();});
+                myApp.alert('Morador inserido com sucesso!', function () { mainView.router.load({pageName: 'morador'}); morador();});
             } else if (data=="erro"){
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert(data, 'Aptohome');
+                myApp.alert(data);
             }
 
           });
@@ -5389,18 +5377,18 @@ $$('#cadastro-teste').on('click', function(){
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data=="ok") {
                myApp.hideIndicator();
-                myApp.alert('Morador teste cadastrado com sucesso!<br><br>Você receberá um email de confirmação para criar sua senha (Caso não receba, verificar na pasta SPAM).', 'Aptohome', function () { myApp.closeModal('.popup.modal-in');});
+                myApp.alert('Morador teste cadastrado com sucesso!<br><br>Você receberá um email de confirmação para criar sua senha (Caso não receba, verificar na pasta SPAM).', function () { myApp.closeModal('.popup.modal-in');});
             } else if (data=="erro"){
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert(data, 'Aptohome');
+                myApp.alert(data);
             }
 
           });
@@ -5594,7 +5582,7 @@ function alertaportariacont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
 }
@@ -5701,7 +5689,7 @@ function delvisitante(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-visitante').eq($("li.swipeout-visitante[data-index="+eq+"]").index()));
@@ -5710,7 +5698,7 @@ function delvisitante(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -5838,7 +5826,7 @@ function visitantecont(id,action,active){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
 
@@ -6024,20 +6012,20 @@ $('#butinserirvisitante').on('click', function(){
     if (localStorage.getItem("portariaIdportaria")) {
         if (!$('#txtvisitantecondominio:checked').val()){
             if ($$('#blocolistportariavisitantes').val()=="" || $$('#domiciliolistportariavisitantes').val()=="") {
-                myApp.alert('Selecione o Bloco e Apartamento.', 'Aptohome');
+                myApp.alert('Selecione o Bloco e Apartamento.');
             }else{
 
                 if ($$('#txtnomevisitante').val()!="") {
                     enviarvisitante();
                 }else{
-                    myApp.alert('Preencha todos os campos.', 'Aptohome');    
+                    myApp.alert('Preencha todos os campos.');    
                 }
             }
         }else{
             if ($$('#txtnomevisitante').val()!="") {
                 enviarvisitante();
             }else{
-                myApp.alert('Preencha todos os campos.', 'Aptohome');    
+                myApp.alert('Preencha todos os campos.');    
             }
         }
     }else{  
@@ -6047,14 +6035,14 @@ $('#butinserirvisitante').on('click', function(){
 
         if ($$('#txtnomevisitante').val()!="") {
             if (datatermino<datainicio) {
-                myApp.alert('Data término deve ser maior que data início', 'Aptohome'); 
+                myApp.alert('Data término deve ser maior que data início'); 
             } else if (($$('#txthorainiciotempvisitante').val()!="") && ($$('#txthorainiciotempvisitante').val()==$$('#txthoraterminotempvisitante').val())) {
-                 myApp.alert('Data início e término devem ser diferentes', 'Aptohome'); 
+                 myApp.alert('Data início e término devem ser diferentes'); 
             } else{
                 enviarvisitante();
             }
         }else{
-            myApp.alert('Preencha todos os campos.', 'Aptohome');    
+            myApp.alert('Preencha todos os campos.');    
         }
     }
 
@@ -6191,19 +6179,19 @@ function enviarvisitante()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data=="" || data =="erro") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
                 console.log(data);
             } else {
                 myApp.hideIndicator();
                 if (localStorage.getItem("portariaIdportaria")) {
-                    myApp.alert('Visitante inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'index'});});
+                    myApp.alert('Visitante inserido com sucesso!', function () { mainView.router.load({pageName: 'index'});});
                 }else{
-                    myApp.alert('Visitante inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'visitante'}); visitante();});
+                    myApp.alert('Visitante inserido com sucesso!', function () { mainView.router.load({pageName: 'visitante'}); visitante();});
                 }
             }
           });
@@ -6255,19 +6243,19 @@ function enviarvisitanteacesso(acesso)
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
                 console.log(data);
             } else {
                 myApp.hideIndicator();
                 if (acesso=="entrada") {
-                    myApp.alert('Entrada inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'index'});});
+                    myApp.alert('Entrada inserida com sucesso!', function () { mainView.router.load({pageName: 'index'});});
                 }else if (acesso=="saida") {
-                    myApp.alert('Saída inserida com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'index'});});
+                    myApp.alert('Saída inserida com sucesso!', function () { mainView.router.load({pageName: 'index'});});
                 }
             }
           });
@@ -6358,7 +6346,7 @@ function delveiculo(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-veiculo').eq($("li.swipeout-veiculo[data-index="+eq+"]").index()));
@@ -6367,7 +6355,7 @@ function delveiculo(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -6448,7 +6436,7 @@ function veiculocont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -6641,7 +6629,7 @@ $('#butinserirveiculo').on('click', function(){
             enviarveiculo();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -6677,15 +6665,15 @@ function enviarveiculo()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Veículo inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'veiculo'}); veiculo();});
+                myApp.alert('Veículo inserido com sucesso!', function () { mainView.router.load({pageName: 'veiculo'}); veiculo();});
             }
           });
 }
@@ -6775,7 +6763,7 @@ $('#inserircomuncondominio').on('click', function(){
                 myApp.hideIndicator(); 
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro ao carregar dados, tente novamente!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
+                myApp.alert('Erro ao carregar dados, tente novamente!', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
             }
         });
     }
@@ -7238,7 +7226,7 @@ function comuncomunicadocont(id){
 
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
 
@@ -7299,7 +7287,6 @@ function comuncomunicadocont(id){
 
             },error: function(data) {
                 //myApp.hideIndicator();
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
 
@@ -7425,7 +7412,7 @@ $('#butinserircomuncondominio').on('click', function(){
             enviarcomuncondominio();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -7460,7 +7447,7 @@ $$('#pdfFileComuncondominio').on('change', function (e) {
           
         }
     }else{
-        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.', 'Aptohome');
+        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.');
     }
 
 });
@@ -7517,12 +7504,12 @@ function enviarcomuncondominio()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -7531,7 +7518,7 @@ function enviarcomuncondominio()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
+                    myApp.alert('Comunicado inserido com sucesso!', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
                 }
               });
         }else{
@@ -7545,12 +7532,12 @@ function enviarcomuncondominio()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -7559,7 +7546,7 @@ function enviarcomuncondominio()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
+                    myApp.alert('Comunicado inserido com sucesso!', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
                 }
               });
         }
@@ -7613,7 +7600,7 @@ ptrContent.on('refresh', function (e) {
                 myApp.hideIndicator(); 
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro ao carregar dados, tente novamente!', 'Aptohome', function () { mainView.router.load({pageName: 'comunportaria'}); comunportaria();});
+                myApp.alert('Erro ao carregar dados, tente novamente!', function () { mainView.router.load({pageName: 'comunportaria'}); comunportaria();});
             }
         });
     }
@@ -7957,7 +7944,7 @@ function comunportariacont(id){
 
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
 
@@ -8016,8 +8003,6 @@ function comunportariacont(id){
                 $('#comunicadorespcont-cont').append(dataresposta);
 
             },error: function(data) {
-                /*myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
             }
         });
 
@@ -8143,7 +8128,7 @@ function butinserirresp(){
             enviarresp();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 }
@@ -8209,15 +8194,15 @@ function enviarresp()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if ((data!="ok") && (data!=" ok")) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Resposta inserida com sucesso!', 'Aptohome', function () { mainView.router.back();});
+                myApp.alert('Resposta inserida com sucesso!', function () { mainView.router.back();});
             }
           });
 }
@@ -8338,7 +8323,7 @@ $('#butinserircomunportaria').on('click', function(){
             enviarcomunportaria();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -8372,7 +8357,7 @@ $$('#pdfFileComunportaria').on('change', function (e) {
           reader.readAsDataURL(f);
         }
     }else{
-        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.', 'Aptohome');
+        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.');
     }
 
 });
@@ -8446,12 +8431,12 @@ function enviarcomunportaria()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -8461,9 +8446,9 @@ function enviarcomunportaria()
                     $('input[type=hidden]').val("");
 
                     if (localStorage.getItem("portariaIdportaria")) {
-                        myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { window.location = "index.html";});
+                        myApp.alert('Comunicado inserido com sucesso!', function () { window.location = "index.html";});
                     }else{
-                        myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comunportaria();});
+                        myApp.alert('Comunicado inserido com sucesso!', function () { mainView.router.load({pageName: 'comuncondominio'}); comunportaria();});
                     }
                 }
               });
@@ -8478,12 +8463,12 @@ function enviarcomunportaria()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -8493,9 +8478,9 @@ function enviarcomunportaria()
                     $('input[type=hidden]').val("");
 
                     if (localStorage.getItem("portariaIdportaria")) {
-                        myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { window.location = "index.html";});
+                        myApp.alert('Comunicado inserido com sucesso!', function () { window.location = "index.html";});
                     }else{
-                        myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comunportaria();});
+                        myApp.alert('Comunicado inserido com sucesso!', function () { mainView.router.load({pageName: 'comuncondominio'}); comunportaria();});
                     }
                 }
               });
@@ -8702,7 +8687,7 @@ function comunmoradorcont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
 
@@ -8761,8 +8746,7 @@ function comunmoradorcont(id){
                 $('#comunicadorespcont-cont').append(dataresposta);
 
             },error: function(data) {
-                /*myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
+
             }
         });
 
@@ -8896,7 +8880,7 @@ $('#butinserircomunmorador').on('click', function(){
             enviarcomunmorador();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -8930,7 +8914,7 @@ $$('#pdfFileComunmorador').on('change', function (e) {
           reader.readAsDataURL(f);
         }
     }else{
-        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.', 'Aptohome');
+        myApp.alert('Formato inválido! Escolha um arquivo no formato PDF.');
     }
 
 });
@@ -8964,12 +8948,12 @@ function enviarcomunmorador()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -8978,7 +8962,7 @@ function enviarcomunmorador()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comunmorador();});
+                    myApp.alert('Comunicado inserido com sucesso!', function () { mainView.router.load({pageName: 'comuncondominio'}); comunmorador();});
                 }
               });
         }else{
@@ -8992,12 +8976,12 @@ function enviarcomunmorador()
             })
               .fail(function() {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
               })     
               .done(function(data) {
                 if ((data!="ok") && (data!=" ok")) {
                     myApp.hideIndicator();
-                    myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                    myApp.alert('Erro! Tente novamente.');
                 } else {
                     myApp.hideIndicator();
 
@@ -9006,7 +8990,7 @@ function enviarcomunmorador()
                     });
                     $('input[type=hidden]').val("");
 
-                    myApp.alert('Comunicado inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comunmorador();});
+                    myApp.alert('Comunicado inserido com sucesso!', function () { mainView.router.load({pageName: 'comuncondominio'}); comunmorador();});
                 }
               });
         }
@@ -9248,7 +9232,7 @@ function interfonecont(idmorador,urlMorador,nome,apto){
                 var numberOfUsers = connection.getAllParticipants().length;
                 if (numberOfUsers==0 && auxintcall=="") {
                     
-                    myApp.alert('Usuário não atende!', 'Aptohome', function () { 
+                    myApp.alert('Usuário não atende!', function () { 
                         $("#interfonecontvideo video").remove();
                         $("#interfonecont div:nth-child(2)").remove();
                         $("#interfonecont div:nth-child(3)").remove();
@@ -10440,8 +10424,7 @@ myApp.onPageReinit('alertadechegadacont', function (page) {
                         console.log("del tracking");
                         localStorage.removeItem('idalertadechegadacont');
                     },error: function(data) {
-                        /*myApp.hideIndicator();
-                        myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
+
                     }
                 });
             mainView.router.load({pageName: 'index'});
@@ -10521,7 +10504,6 @@ function banner(){
             },error: function(data) {
                 myApp.hideIndicator();
                 $('#banner-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     //alert("Entrei");
@@ -10539,17 +10521,17 @@ function delbanner(guid) {
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Banner excluido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'banner'}); banner(); myApp.closeModal('.popup.modal-in');});
+                myApp.alert('Banner excluido com sucesso!', function () { mainView.router.load({pageName: 'banner'}); banner(); myApp.closeModal('.popup.modal-in');});
                 //myApp.swipeoutDelete($$('li.img-banner').eq($$("li.img-banner[data-index="+$$(this).attr("data-index").val()+"]").index()));
                 //myApp.swipeoutDelete($$('li.swipeout-cronograma').eq(eq));
             }
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -10598,7 +10580,7 @@ function bannercont(id){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
 
@@ -10717,7 +10699,7 @@ $('#butinserirbanner').on('click', function(){
             enviarbanner();
 
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -10749,15 +10731,15 @@ function enviarbanner()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if ((data!="ok") && (data!=" ok")) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Banner inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'banner'}); banner();});
+                myApp.alert('Banner inserido com sucesso!', function () { mainView.router.load({pageName: 'banner'}); banner();});
             }
           });
 }
@@ -10820,7 +10802,6 @@ function agendamentodeespaco() {
             },error: function(data) {
                 //myApp.hideIndicator();
                 //$('#banner-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     $$('.actionOptionAgendamento').on('click', function (e) {
@@ -10868,7 +10849,6 @@ console.log("dia = "+dia+" local = "+idlocalespaco);
             },error: function(data) {
                 //myApp.hideIndicator();
                 //$('#banner-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
     $$('.actionOptionAgendamento').on('click', function (e) {
@@ -10920,7 +10900,6 @@ console.log("dia = "+dia+" local = "+idlocalespaco);
             
             },error: function(data) {
                 myApp.hideIndicator();
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
 
@@ -11034,7 +11013,6 @@ console.log("dia = "+dia+" local = "+idlocalespaco);
             
             },error: function(data) {
                 myApp.hideIndicator();
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
         //console.log(dia+","+idlocalespaco);
@@ -11077,15 +11055,15 @@ function confespaco(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Agendamento confirmado com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'agendamentodeespaco'});agendamentodeespaco();});
+                myApp.alert('Agendamento confirmado com sucesso!', function () { mainView.router.load({pageName: 'agendamentodeespaco'});agendamentodeespaco();});
             }
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -11105,7 +11083,7 @@ function delespaco(guid,eq){
             success: function(data) {
             if (data!="ok") {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente ='+data, 'Aptohome');
+                myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
                 myApp.swipeoutDelete($$('li.swipeout-espaco').eq($("li.swipeout-espaco[data-index="+eq+"]").index()));
@@ -11114,7 +11092,7 @@ function delespaco(guid,eq){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     });
@@ -11203,7 +11181,7 @@ function espacocont(id,push){
             
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro! Tente novamente.', 'Aptohome');
+                myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
@@ -11273,7 +11251,7 @@ $('.inseriragendamentodeespaco').on('click', function(){
                 myApp.hideIndicator(); 
             },error: function(data) {
                 myApp.hideIndicator();
-                myApp.alert('Erro ao carregar dados, tente novamente!', 'Aptohome', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
+                myApp.alert('Erro ao carregar dados, tente novamente!', function () { mainView.router.load({pageName: 'comuncondominio'}); comuncondominio();});
             }
         });
     }
@@ -11393,7 +11371,6 @@ function valorestaxasagendamento(){
             },error: function(data) {
                 //myApp.hideIndicator();
                 //$('#banner-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                //myApp.alert('Erro! Tente novamente.', 'Aptohome');
             }
         });
 }
@@ -11404,14 +11381,14 @@ $$('#butinseriragendamento').on('click', function(){
 
     if (($$('#horainicoagendamento').val()!="00:00") &&  ($$('#horaterminoagendamento').val()!="00:00")) {
         if ($$('#horaterminoagendamento').val()<$$('#horainicoagendamento').val()) {
-            myApp.alert('Hora término deve ser maior que hora início', 'Aptohome'); 
+            myApp.alert('Hora término deve ser maior que hora início'); 
         } else if ($$('#horaterminoagendamento').val()==$$('#horainicoagendamento').val()) {
-             myApp.alert('Hora início e término devem ser diferentes', 'Aptohome'); 
+             myApp.alert('Hora início e término devem ser diferentes'); 
         } else{
             enviarespaco();
         }
     }else{
-        myApp.alert('Preencha todos os campos.', 'Aptohome');    
+        myApp.alert('Preencha todos os campos.');    
     }
 
 });
@@ -11441,12 +11418,12 @@ function enviarespaco()
         })
           .fail(function() {
             myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.', 'Aptohome');
+            myApp.alert('Erro! Tente novamente.');
           })     
           .done(function(data) {
             if ((data=="ok") || (data==" ok")) {
                 myApp.hideIndicator();
-                myApp.alert('Agendamento inserido com sucesso!', 'Aptohome', function () { mainView.router.load({pageName: 'agendamentodeespaco'});agendamentodeespaco();});
+                myApp.alert('Agendamento inserido com sucesso!', function () { mainView.router.load({pageName: 'agendamentodeespaco'});agendamentodeespaco();});
 
                 $('#forminseriragendamentodeespaco').each (function(){
                   this.reset();
@@ -11459,7 +11436,7 @@ function enviarespaco()
                   this.reset();
                 });
 
-                myApp.alert(data, 'Aptohome', function () { mainView.router.load({pageName: 'agendamentodeespaco'});agendamentodeespaco();});           
+                myApp.alert(data, function () { mainView.router.load({pageName: 'agendamentodeespaco'});agendamentodeespaco();});           
             }
           });
 }
@@ -11576,10 +11553,10 @@ function limpar()
 
 /////////////////////////// push ///////////////////////////
 
-        //document.addEventListener('app.Ready', onDeviceReady, true);
+        document.addEventListener('app.Ready', onDeviceReady, true);
         function onDeviceReady() {
 
-            window.ga.startTrackerWithId("UA-77306865-2", 10);
+            window.ga.startTrackerWithId("UA-121902721-1", 10);
 
 
             function TrackButtonClicked() {
@@ -11610,11 +11587,11 @@ function limpar()
 
             var push = PushNotification.init({
                 android: {
-                    senderID: "214666097431",
+                    senderID: "578711406341",
                 },
                 ios: {
-                    senderID: "214666097431",
-                    gcmSandbox: "false", // false para producao true para desenvolvimento
+                    senderID: "578711406341",
+                    gcmSandbox: "true", // false para producao true para desenvolvimento
                     alert: "true",
                     sound: "true",
                     badge: "false"
@@ -11968,8 +11945,7 @@ $('.buttonshare').hide();
                             localStorage.removeItem('idalerta');
                             localStorage.removeItem('trackingactive');
                         },error: function(data) {
-                            /*myApp.hideIndicator();
-                            myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
+
                         }
                     });
 
@@ -12123,8 +12099,7 @@ $('.buttonshare').hide();
                             localStorage.removeItem('trackingactive');
                             localStorage.removeItem('panico');
                         },error: function(data) {
-                            /*myApp.hideIndicator();
-                            myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
+
                         }
                     });
 
@@ -12272,8 +12247,7 @@ $('.buttonshare').hide();
 
                                 }
                             },error: function(data) {
-                                /*myApp.hideIndicator();
-                                myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
+
                             }
                         });
 
@@ -12701,8 +12675,7 @@ $('.buttonshare').hide();
                                     console.log("verificar se existe alerta"+ "idalerta= " + data.alerta[0].idalerta);
                                 }
                             },error: function(data) {
-                                /*myApp.hideIndicator();
-                                myApp.alert('Erro! Tente novamente.', 'Aptohome');*/
+
                             }
                         });
 

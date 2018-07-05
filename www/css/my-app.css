@@ -70,7 +70,7 @@
 	height: 40px;
 }
 .border-top-tit{
-	border-top: solid 5px #3f51b5;
+	border-top: solid 5px #4caf50;
 }
 .navbar-fixed .toolbar {
 	top: 56px;
@@ -213,7 +213,7 @@ ul#alertavisitanteshome-cont {
 	display: none!important;
 }
 .toolbar.tabbar {
-	background: #3F67CF!important;
+	background: #4caf50!important;
 }
 a.tab-link.active{
 	border-bottom: solid 3px rgba(255, 255, 255, 0.5);
@@ -256,7 +256,7 @@ a.tab-link.active{
 	left: inherit!important;
 }
 .navbar-inner{
-	background: #3f51b5;
+	background: #009688;
 }
 .navbar .center, .subnavbar .center{
 	font-size: 15px!important;
@@ -489,7 +489,7 @@ color: #fff;
 }
 .page-login{
 	padding: 10px;
-	background-color: #00285b;
+	background-color: #009688;
 	/*background-image: url("../images/bg-aptohome.png");
 	background-size: cover;*/
 }
@@ -1095,7 +1095,6 @@ position: fixed;
 .img-banner a img{
 	width: 100%;
 	margin-bottom: -7px!important;
-	height: 265px;
 }
 .banner-full{
 	width: 100%;
