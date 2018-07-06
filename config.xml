@@ -11,7 +11,7 @@
 <allow-navigation href="*"/>
 <allow-intent href="*"/>
 
-<preference name="phonegap-version" value="cli-6.4.0" />
+<preference name="phonegap-version" value="cli-6.2.0" />
 <plugin name="cordova-plugin-crosswalk-webview" spec="^1.8.0">
     <variable name="XWALK_VERSION" value="18+"/>
     <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+"/>
@@ -40,7 +40,7 @@
 <plugin name="cordova-plugin-splashscreen" spec="3.2.2"/>
 <plugin name="cordova-plugin-background-mode" spec="0.6.5"/>
 
-<plugin name="phonegap-plugin-push" spec="1.9.0">
+<plugin name="phonegap-plugin-push" spec="1.6.4">
 <variable name="SENDER_ID" value="578711406341"/>
 </plugin>
 
