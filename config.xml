@@ -5,7 +5,7 @@
 <description>Moradores e condomínio conectados</description>
 <author>Agência Bynnes</author>
 <content src="index.html"/>
-
+<preference name="android-build-tool" value="gradle" />
 
 <access origin="*"/>
 <allow-navigation href="*"/>
@@ -88,7 +88,7 @@
 
 <platform name="android" >
     <preference name="android-minSdkVersion" value="16"/>
-    <preference name="android-targetSdkVersion" value="26"/>
+    <preference name="android-targetSdkVersion" value="21"/>
     <preference name="android-installLocation" value="auto"/>
     <preference name="Fullscreen" value="false"/>
     <preference name="Orientation" value="default"/>
