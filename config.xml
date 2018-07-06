@@ -39,7 +39,6 @@
 <plugin name="cordova-plugin-compat" spec="1.0.0"/>
 <plugin name="cordova-plugin-splashscreen" spec="3.2.2"/>
 <plugin name="cordova-plugin-background-mode" spec="0.6.5"/>
-<plugin name="cordova-plugin-mauron85-background-geolocation" spec="0.9.6"/>
 
 <plugin name="phonegap-plugin-push" spec="1.6.4">
 <variable name="SENDER_ID" value="578711406341"/>
