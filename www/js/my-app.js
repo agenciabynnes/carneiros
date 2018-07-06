@@ -11455,7 +11455,7 @@ function enviarespaco()
         dateFormat: 'dd-mm-yyyy',
         minDate: minDate,
         toolbarTemplate: 
-            '<div class="toolbar calendar-custom-toolbar">' +
+            '<div class="toolbar calendar-custom-toolbar bg-green">' +
                 '<div class="toolbar-inner">' +
                     '<div class="left">' +
                         '<a href="#" class="link icon-only"><i class="icon icon-back"></i></a>' +

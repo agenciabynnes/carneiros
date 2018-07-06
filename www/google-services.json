@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "578711406341",
+    "firebase_url": "https://carneiros-f13f6.firebaseio.com",
+    "project_id": "carneiros-f13f6",
+    "storage_bucket": "carneiros-f13f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:578711406341:android:55629a297ec4341a",
+        "android_client_info": {
+          "package_name": "com.carneiros.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "578711406341-28dojr6eei3cnp3okvdnhou13be1hqmv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjLL8GzbLiZB7_LXIzaT-kh6qxL8dJALE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
