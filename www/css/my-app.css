@@ -996,7 +996,7 @@ position: fixed;
 /* mapa  */
 
  .maps-size {
-	height: 230px;
+	height: calc(100vh - 250px);
 	width: 100%;
 	position: relative;
   }
@@ -1137,7 +1137,7 @@ position: fixed;
 @media (min-height: 630px) and (min-width: 630px){
 
 	.maps-size {
-	    height: 500px!important;
+
 	}
 	.card-content {
 		min-height: 350px!important;
