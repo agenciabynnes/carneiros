@@ -3638,6 +3638,14 @@ function transparenciadecontastipo(){
 
     myApp.showIndicator();
 
+    // retirar botão inserir
+    if (localStorage.getItem("moradorIdmorador")) {
+        $('.inserirtransparenciadecontas').addClass('invisivel');
+    }
+    if (localStorage.getItem("administradoraIdadministradora") || localStorage.getItem("sindicoIdsindico")) {
+        $('.inserirtransparenciadecontas').removeClass('invisivel');
+    }
+
     $.ajax({
         url: $server+"functionAppTransparencia.php?idcondominio="+localStorage.getItem("condominioId")+"&action=list",
         dataType : "json",
@@ -3687,6 +3695,9 @@ function transparenciadecontastipo(){
                 }
             }, 2000);
         myApp.hideIndicator();
+        },error:function(data){
+            $('.docstipo').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
+            myApp.hideIndicator();
         }
     });
 
@@ -5356,9 +5367,9 @@ function enviaraddmorador()
 ///////////////////////////// inserir morador teste///////////////////////////
 $$('#cadastro-teste').on('click', function(){
  
-        $$idcondominio = "1";
-        $$idbloco = "2";
-        $$iddomicilio = "3093";
+        $$idcondominio = "57";
+        $$idbloco = "1996";
+        $$iddomicilio = "9335";
         $$txtNomeAddMorador = $$('#txtnomeaddmoradorteste').val();
         $$txtEmailAddMorador = $$('#txtemailaddmoradorteste').val();
         $$cellPhoneaddMorador = $$('#cellphoneaddmoradorteste').val();
@@ -11592,7 +11603,7 @@ function limpar()
                 },
                 ios: {
                     senderID: "578711406341",
-                    gcmSandbox: "false", // false para producao true para desenvolvimento
+                    gcmSandbox: "true", // false para producao true para desenvolvimento
                     alert: "true",
                     sound: "true",
                     badge: "false"
