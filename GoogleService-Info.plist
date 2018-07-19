@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>578711406341-i7ejqgbee0jjr370l61nkn4r3fbhl9gr.apps.googleusercontent.com</string>
+	<string>725429976100-djcqn7iu2hb5k550qg3ua5o5tb4cg6hs.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.578711406341-i7ejqgbee0jjr370l61nkn4r3fbhl9gr</string>
+	<string>com.googleusercontent.apps.725429976100-djcqn7iu2hb5k550qg3ua5o5tb4cg6hs</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBZy4drs0VkobC2ng1Zkj4FSjxYPuSmmvM</string>
+	<string>AIzaSyC252fD4l_2DFULy4Y373wBkLOHxD7mRco</string>
 	<key>GCM_SENDER_ID</key>
-	<string>578711406341</string>
+	<string>725429976100</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.carneiros.ios</string>
 	<key>PROJECT_ID</key>
-	<string>carneiros-f13f6</string>
+	<string>carneiros-210703</string>
 	<key>STORAGE_BUCKET</key>
-	<string>carneiros-f13f6.appspot.com</string>
+	<string>carneiros-210703.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:578711406341:ios:3d0656e75e8f0741</string>
+	<string>1:725429976100:ios:3d0656e75e8f0741</string>
 	<key>DATABASE_URL</key>
-	<string>https://carneiros-f13f6.firebaseio.com</string>
+	<string>https://carneiros-210703.firebaseio.com</string>
 </dict>
 </plist>
