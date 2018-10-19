@@ -1609,7 +1609,7 @@ function searchhomeportaria(){
     console.log("searchhomeportaria");
     // limpa campo de pesquisa
     //mySearchbar.clear();
-    mySearchbar.disable();
+    //mySearchbar.disable();
         $.ajax({
             url: $server+"functionAppSearch.php?idcondominio="+localStorage.getItem("condominioId")+"&action=listall",
             dataType : "json",
@@ -1851,6 +1851,7 @@ function searchhomeportaria(){
                         //console.log("datasearch = "+qtdvisitanteaberto+" + "+qtdvisitante+" + "+qtdveiculo+" + "+qtdmorador+" = "+totalqtd);
                         //console.log("searchportariahome = "+ qtdsearchportariahome);
                         $('#searchportariahome-cont').html(datasearch);
+                        //console.log("aqui"+datasearch);
                     //}
 
                 }else{
@@ -2340,6 +2341,11 @@ function exibecamerasdeseguranca(data){
     //onlandscape();
     $("#exibecamerasdeseguranca-cont").attr('src',data);
     
+}
+
+//////////////////////////////// boletos ////////////////////////////////
+function boletos(){
+    $(".iframe-boleto").attr("src","https://actaapp.com21.com.br");
 }
 
 // Pull to refresh content
@@ -7755,7 +7761,7 @@ function teste (){
 
 function comunportariahome(alvo){
 
-alertadechegadahome();
+//alertadechegadahome();
 
     //var datatransparencia;
     $('.badgecomunicado').html();
