@@ -11774,7 +11774,7 @@ function limpar()
                 },
                 ios: {
                     senderID: "725429976100",
-                    gcmSandbox: "false", // false para producao true para desenvolvimento
+                    gcmSandbox: "true", // false para producao true para desenvolvimento
                     alert: "true",
                     sound: "true",
                     badge: "false"
