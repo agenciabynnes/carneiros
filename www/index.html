@@ -55,6 +55,9 @@
                     <li>
                         <a href="#index" class="panel-close"><i class="icon fa fa-home fa-lg"></i>HOME</a>
                     </li>
+                    <li class="menuprevisao">
+                        <a href="#previsaocont" onclick="previsaocont();PageButtonClicked('Previsão')" class="panel-close"><i class="icon fa fa-sun-o fa-lg color-yellow"></i>PREVISÕES</a>
+                    </li>
                     <li class="menucomunicado">
                         <a href="#comuncondominio" class="panel-close" onclick="comuncondominio();PageButtonClicked('Comunicados')"><i class="icon fa fa-comment fa-lg color-blue"></i>COMUNICADOS</a>
                     </li>
@@ -66,6 +69,9 @@
                     </li>
                     <li class="menuespaco">
                         <a href="#agendamentodeespaco" class="panel-close agendamentodeespaco" onclick="agendamentodeespaco();PageButtonClicked('Agendamento de Espaço')"><i class="icon fa fa-calendar fa-lg color-red"></i>AGENDAMENTO DE ESPAÇOS</a>
+                    </li>
+                    <li class="menuboletos">
+                        <a href="#boletos" class="panel-close" onclick="PageButtonClicked('Boletos')"><i class="icon fa fa-file-text-o fa-lg color-lightgreen"></i>BOLETOS</a>
                     </li>
                     <!--<li class="menupagamentos">
                         <a href="#pagamentos" class="panel-close" onclick="pagamentos();PageButtonClicked('Pagamentos')"><i class="icon fa fa-credit-card fa-lg color-lightgreen"></i>PAGAMENTO DE CONTAS</a>
@@ -80,7 +86,7 @@
                         <a href="#transparenciadecontastipo" class="panel-close" onclick="transparenciadecontastipo();"><i class="icon fa fa-calculator fa-lg color-orange"></i>DOCUMENTOS</a>
                     </li>
                     <!--<li class="menuassembleia">
-                        <a href="#enquetes" class="panel-close" onclick="enquetes();PageButtonClicked('Assembleia Virtual');"><i class="icon fa fa-check-square-o fa-lg color-deeporange"></i>ASSEMBLEIA VIRTUAL</a>
+                        <a href="#enquete" class="panel-close" onclick="enquete();PageButtonClicked('Assembleia Virtual');"><i class="icon fa fa-check-square-o fa-lg color-deeporange"></i>ASSEMBLEIA VIRTUAL</a>
                     </li>-->
                     <li class="menuanuncios">
                         <a href="#muraldeanuncios" class="panel-close" onclick="muraldeanuncios();PageButtonClicked('Mural de Anúncios')"><i class="icon fa fa-shopping-cart fa-lg color-teal"></i>MURAL DE ANÚNCIOS</a>
@@ -133,6 +139,9 @@
               <div id="menuhome" class="menuhome list-block nomargin font13">
                 <ul>
                     <li class="menucomunicado">
+                        <a href="#previsaocont" onclick="previsaocont();PageButtonClicked('Previsão')" class="item-link"><i class="icon fa fa-sun-o fa-3x color-yellow"></i><br>PREVISÕES<br>TEMPO E MARÉ</a>
+                    </li>
+                    <li class="menucomunicado">
                         <a href="#comuncondominio" onclick="comuncondominio();PageButtonClicked('Comunicados')" class="item-link"><i class="icon fa fa-comment fa-3x badgecomunicado color-blue"></i><br>COMUNICADOS<br>DO CONDOMÍNIO</a>
                     </li>
                     <!--<li class="menuinterfone">
@@ -143,6 +152,9 @@
                     </li>
                     <li class="menuespaco">
                         <a href="#agendamentodeespaco" class="item-link agendamentodeespaco" onclick="agendamentodeespaco();PageButtonClicked('Agendamento de Espaços')"><i class="icon fa fa-calendar fa-3x badgeespaco color-red"></i><br>AGENDAMENTO<br>DE ESPAÇOS</a>
+                    </li>
+                    <li class="menuboletos">
+                        <a href="#boletos" onclick="PageButtonClicked('Boletos')" class="item-link"><i class="icon fa fa-file-text-o fa-3x color-lightgreen"></i><br>BOLETOS<br>DO CONDOMÍNIO</a>
                     </li>
                     <!--<li class="menupagamentos">
                         <a href="#pagamentos" onclick="pagamentos();PageButtonClicked('Pagamentos')" class="item-link"><i class="icon fa fa-credit-card fa-3x color-lightgreen"></i><br>PAGAMENTO<br>DE CONTAS</a>
@@ -157,7 +169,7 @@
                         <a href="#transparenciadecontastipo" class="item-link" onclick="transparenciadecontastipo();"><i class="icon fa fa-calculator fa-3x badgetransparencia color-orange"></i><br>DOCUMENTOS<br>DO CONDOMÍNIO</a>
                     </li>
                     <!--<li class="menuassembleia">
-                        <a href="#enquetes" class="item-link" onclick="enquetes();PageButtonClicked('Assembleia Virtual')"><i class="icon fa fa-check-square-o fa-3x badgetransparencia color-deeporange"></i><br>ASSEMBLEIA<br>VIRTUAL</a>
+                        <a href="#enquete" class="item-link" onclick="enquete();PageButtonClicked('Assembleia Virtual')"><i class="icon fa fa-check-square-o fa-3x badgetransparencia color-deeporange"></i><br>ASSEMBLEIA<br>VIRTUAL</a>
                     </li>-->
                     <li class="menuanuncios">
                         <a href="#muraldeanuncios" onclick="muraldeanuncios();PageButtonClicked('Mural de Anúncios')" class="item-link" ><i class="icon fa fa-shopping-cart fa-3x color-teal"></i><br>MURAL<br>DE ANÚNCIOS</a>
@@ -180,6 +192,28 @@
                   </ul>
               </div>
             </div>
+
+            <!-- boleto conteudo -->
+            <div data-page="boletos" class="page cached">
+
+              <div class="navbar">
+                <div class="navbar-inner">
+                  <div class="left"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+                    <div class="center">BOLETOS</div>
+                    <div class="right"><a href="#" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+                    <div class="right no-margin"><a href="#index" class="link icon-only"><i class="icon fa fa-home"></i></a></div>
+                </div>
+              </div>
+
+
+              <div class="page-content">
+                <div class="content-block boletos-100">  
+                  <iframe src="https://actaapp.com21.com.br" class="iframe-boleto"></iframe>
+                </div>
+              </div>
+
+            </div>
+
 
             <!-- pagamentos -->
             <div data-page="pagamentos" class="page cached">
@@ -854,7 +888,23 @@
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="agenhorainiperi">
+                      <div class="item-content">
+                        <div class="item-inner">
+                        <div class="item-title label">Período</div>
+                          <div class="item-input">
+                            <input type="hidden" value="" id="horainicoagendamento">
+                            <input type="hidden" value="" id="horaterminoagendamento">
+                            <select id="turnoinicoagendamento">
+                              <option value="" selected="selected">Selecione um período</option>
+                              <option value="08:00">Manhã</option>
+                              <option value="14:00">Tarde</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="agenhoraini">
                       <div class="item-content">
                         <div class="item-inner">
                         <div class="item-title label">Hora início</div>
@@ -890,7 +940,7 @@
                         </div>
                       </div>
                     </li>
-                    <li>
+                    <li class="agenhorater">
                       <div class="item-content">
                         <div class="item-inner">
                         <div class="item-title label">Hora término</div>
@@ -1454,6 +1504,32 @@
             </div>
           </div>
 
+          <!-- previsões -->
+          <div data-page="previsaocont" class="page cached">
+
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="left"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+                  <div class="center">PREVISÕES</div>
+                  <div class="right"><a href="#" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+                  <div class="right no-margin"><a href="#index" class="link icon-only"><i class="icon fa fa-home"></i></a></div>
+              </div>
+            </div>
+
+            <div class="page-content">
+                <div class="list-block media-list tablet">
+                  <div class="previsaotempoconteinar">
+                    <h3 class="previsaotitle">Previsao do tempo</h3>
+                    <div id="previsaotempocont-cont"></div>
+                  </div>
+                  <div class="previsaomareconteinar">
+                    <h3 class="previsaotitle">Previsao da Maré</h3>
+                    <div id="previsaomarecont-cont"></div>  
+                  </div>
+                </div>
+            </div>
+          </div>
+
           <!-- documentos tipo -->
           <div data-page="transparenciadecontastipo" class="page cached">
 
@@ -1648,35 +1724,35 @@
           </div>
 
 
-          <!-- enquetes | assembleia virtual -->
-          <div data-page="enquetes" class="page cached">
+          <!-- enquete | assembleia virtual -->
+          <div data-page="enquete" class="page cached">
 
             <div class="navbar">
               <div class="navbar-inner">
                 <div class="left"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
                   <div class="center">ASSEMBLEIA VIRTUAL</div>
-                  <div class="right"><a href="#enquetes" class="link icon-only"><i class="icon icon-back"></i></a></div>
+                  <div class="right"><a href="#enquete" class="link icon-only"><i class="icon icon-back"></i></a></div>
                   <div class="right no-margin"><a href="#index" class="link icon-only"><i class="icon fa fa-home"></i></a></div>
               </div>
             </div>
 
             <!-- Floatin Action Button -->
-            <a href="#inserirenquetes" id="inserirenquetes" class="inserirenquetes floating-button bg-green">
+            <a href="#inserirenquete" id="inserirenquete" class="inserirenquete floating-button bg-green">
               <i class="icon icon-plus"></i>
             </a>          
-              <div class="page-content enquetes pull-to-refresh-content">
+              <div class="page-content enquete pull-to-refresh-content">
                 <div class="pull-to-refresh-layer">
                   <div class="preloader"></div>
                   <div class="pull-to-refresh-arrow"></div>
                 </div>
                   <div class="list-block media-list tablet">
-                    <ul id="enquetes-cont"></ul>
+                    <ul id="enquete-cont"></ul>
                   </div>
               </div>
           </div>
 
-          <!-- enquetes conteudo -->
-          <div data-page="enquetescont" class="page cached">
+          <!-- enquete conteudo -->
+          <div data-page="enquetecont" class="page cached">
 
             <div class="navbar">
               <div class="navbar-inner">
@@ -1694,8 +1770,8 @@
             </div>
           </div>
 
-          <!-- inserir enquetes | ASSEMBLEIA VIRTUAL -->
-          <div data-page="inserirenquetes" class="page cached">
+          <!-- inserir enquete | ASSEMBLEIA VIRTUAL -->
+          <div data-page="inserirenquete" class="page cached">
 
             <div class="navbar">
               <div class="navbar-inner">
@@ -1709,7 +1785,7 @@
             <div class="page-content">
               <div class="content-block">
                 <div class="list-block tablet">
-                  <form method="post" action="#" role="form" id="forminserirenquetes" enctype="multipart/form-data">
+                  <form method="post" action="#" role="form" id="forminserirenquete" enctype="multipart/form-data">
                     <ul>
                       <li>
                         <div class="item-content">
@@ -2639,6 +2715,17 @@
                           </div>
                         </div>
                       </li>                 
+
+                      <li>
+                        <div class="item-content">
+                          <div class="item-inner">
+                            <div class="item-title label">RG</div>
+                            <div class="item-input">
+                            <input type="text" class="" id="txtrgvisitante" onKeyUp="tabenter(event,getElementById('txtcpfvisitante'))" placeholder="Informe um RG">
+                            </div>
+                          </div>
+                        </div>
+                      </li> 
 
                       <li>
                         <div class="item-content">

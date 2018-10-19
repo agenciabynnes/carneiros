@@ -164,6 +164,7 @@ myApp.onPageReinit('index', function (page) {
         comunportariahome();
         alertadechegadahome();
         searchhomeportaria();
+        visitantealerthome();
 
         if (localStorage.getItem("sindicoIdsindico") && localStorage.getItem("moradorIdmorador")) {
             atualizartoken(localStorage.getItem("token"));
@@ -585,6 +586,7 @@ $$('#entrar').on('click', function(){
                             localStorage.setItem("sindicoCondominioCityname", dados.condominio[0].condominio_cityname);
                             localStorage.setItem("sindicoCondominioUf", dados.condominio[0].condominio_uf);*/
 
+                            localStorage.setItem("sindicoCondominioId", dados.condominio[0].idcondominio);
                             localStorage.setItem("sindicoCondominioNome", localStorage.getItem("condominioNome"));
                             localStorage.setItem("sindicoCondominioStreet", localStorage.getItem("condominioStreet"));
                             localStorage.setItem("sindicoCondominioNumber", localStorage.getItem("condominioNumber"));
@@ -707,7 +709,8 @@ $$('#entrar').on('click', function(){
                         localStorage.setItem("condominioId", dados.condominio[0].idcondominio);
                         //localStorage.setItem("sindicoIdbloco", dados.bloco.idbloco);
                         //localStorage.setItem("blocoNum", dados.condominio.bloco_num);
-                        //localStorage.setItem("sindicoCondominioId", dados.condominio[0].idcondominio);
+                        
+                        localStorage.setItem("sindicoCondominioId", dados.condominio[0].idcondominio);
                         localStorage.setItem("sindicoCondominioNome", dados.condominio[0].condominio_nome);
                         localStorage.setItem("sindicoCondominioStreet", dados.condominio[0].condominio_street);
                         localStorage.setItem("sindicoCondominioNumber", dados.condominio[0].condominio_number);
@@ -783,7 +786,8 @@ $$('#entrar').on('click', function(){
                         localStorage.setItem("condominioId", dados.condominio[0].idcondominio);
                         //localStorage.setItem("sindicoIdbloco", dados.bloco.idbloco);
                         //localStorage.setItem("blocoNum", dados.condominio.bloco_num);
-                        //localStorage.setItem("sindicoCondominioId", dados.condominio[0].idcondominio);
+                        
+                        localStorage.setItem("administradoraCondominioId", dados.condominio[0].idcondominio);
                         localStorage.setItem("administradoraCondominioNome", dados.condominio[0].condominio_nome);
                         localStorage.setItem("administradoraCondominioStreet", dados.condominio[0].condominio_street);
                         localStorage.setItem("administradoraCondominioNumber", dados.condominio[0].condominio_number);
@@ -1433,6 +1437,7 @@ function updateCond(id,push){
             $$.each(data.condominio, function (chave,dados)
             {
                 localStorage.setItem("condominioId", dados.idcondominio);
+                localStorage.setItem("sindicoCondominioId", dados.idcondominio);
                 localStorage.setItem("sindicoCondominioNome", dados.condominio_nome);
                 localStorage.setItem("sindicoCondominioStreet", dados.condominio_street);
                 localStorage.setItem("sindicoCondominioNumber", dados.condominio_number);
@@ -1506,6 +1511,7 @@ function updateCondAdministradora(id,push){
             $$.each(data.condominio, function (chave,dados)
             {
                 localStorage.setItem("condominioId", dados.idcondominio);
+                localStorage.setItem("administradoraCondominioId", dados.idcondominio);
                 localStorage.setItem("administradoraCondominioNome", dados.condominio_nome);
                 localStorage.setItem("administradoraCondominioStreet", dados.condominio_street);
                 localStorage.setItem("administradoraCondominioNumber", dados.condominio_number);
@@ -1627,6 +1633,7 @@ function searchhomeportaria(){
 
                         var name ="";
                         var email ="";
+                        var rg = "";
                         var cpf = "";
                         var exibecont = "";
                         var textnomebloco = "";
@@ -1640,10 +1647,11 @@ function searchhomeportaria(){
                             name = data.search.visitante.visitanteAberto[i].name ? data.search.visitante.visitanteAberto[i].name : "";
                             email = data.search.visitante.visitanteAberto[i].email ? data.search.visitante.visitanteAberto[i].email : "";
                             cpf = data.search.visitante.visitanteAberto[i].cpf ? 'CPF: ' + data.search.visitante.visitanteAberto[i].cpf+'<br>' : "";
+                            rg = data.search.visitante.visitanteAberto[i].rg ? 'RG: ' + data.search.visitante.visitanteAberto[i].rg+'<br>' : "";
 
                             cpfexib = cpf ? cpf : "";
+                            rgexib = rg ? rg : "";
                             cor="#4caf50";
-                            exibecont = cpfexib;
 
                             // Verifica se o condomínio é sem bloco
                             if(data.search.visitante.visitanteAberto[i].num_bloco!="Sem bloco"){
@@ -1671,7 +1679,8 @@ function searchhomeportaria(){
                                                           '<div class="item-title-row">'+
                                                             '<div class="item-title">'+textnomebloco+'</div>'+
                                                           '</div>'+
-                                                          '<div class="item-text">'+exibecont+'</div>'+
+                                                          '<div class="item-text">'+rgexib+'</div>'+
+                                                          '<div class="item-text">'+cpfexib+'</div>'+
                                                           '<div class="item-text">'+textbloco+'</div>'+
                                                         '</div>'+
                                                       '</a>'+
@@ -1690,6 +1699,7 @@ function searchhomeportaria(){
 
                         var name ="";
                         var email ="";
+                        var rg = "";
                         var cpf = "";
                         var exibecont = "";
                         var textnomebloco = "";
@@ -1702,6 +1712,7 @@ function searchhomeportaria(){
 
                             name = data.search.visitante.visitante[i].name ? data.search.visitante.visitante[i].name : "";
                             email = data.search.visitante.visitante[i].email ? data.search.visitante.visitante[i].email : "";
+                            rg = data.search.visitante.visitante[i].rg ? 'RG: ' + data.search.visitante.visitante[i].rg+'<br>' : "";
                             cpf = data.search.visitante.visitante[i].cpf ? 'CPF: ' + data.search.visitante.visitante[i].cpf+'<br>' : "";
                             dataini = data.search.visitante.visitante[i].horaini ? data.search.visitante.visitante[i].horaini : "";
                             horater = data.search.visitante.visitante[i].horater ? data.search.visitante.visitante[i].horater : "";
@@ -1710,6 +1721,7 @@ function searchhomeportaria(){
                             datavisit = datainiexib+dataterexib;
 
                             cpfexib = cpf ? cpf : "";
+                            rgexib = rg ? rg : "";
 
                             if (data.search.visitante.visitante[i].tipo=="1") {
                                 cor="#3f51b5";
@@ -1748,6 +1760,7 @@ function searchhomeportaria(){
                                                           '<div class="item-title-row">'+
                                                             '<div class="item-title">'+textnomebloco+'</div>'+
                                                           '</div>'+
+                                                          '<div class="item-text">'+rgexib+'</div>'+
                                                           '<div class="item-text">'+exibecont+'</div>'+
                                                           '<div class="item-text">'+textbloco+'</div>'+
                                                         '</div>'+
@@ -1844,7 +1857,7 @@ function searchhomeportaria(){
                     //myApp.hideIndicator();
                     //$('#visitante-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
                 }
-                setTimeout(searchhomeportaria, 60000);
+                //setTimeout(searchhomeportaria, 60000);
             },error: function(data) {
                 //myApp.hideIndicator();
                 //$('#visitante-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
@@ -1888,6 +1901,7 @@ function editarvisitante(idvisitante,action){
 
                     var name ="";
                     var email ="";
+                    var rg = "";
                     var cpf = "";
                     var phone = "";
                     var dataini = "";
@@ -1896,6 +1910,7 @@ function editarvisitante(idvisitante,action){
 
                     name = data.visitante[0].name ? data.visitante[0].name : "";
                     email = data.visitante[0].email ? data.visitante[0].email : "";
+                    rg = data.visitante[0].rg ? data.visitante[0].rg : "";
                     cpf = data.visitante[0].cpf ? data.visitante[0].cpf : "";
                     phone = data.visitante[0].phone ? data.visitante[0].phone : "";
                     horaini = data.visitante[0].horaini ? data.visitante[0].horaini : "";
@@ -1907,6 +1922,7 @@ function editarvisitante(idvisitante,action){
 
                     //datavisit = 'Início: '+convertMysqldate(dataini)+'<br> Término: '+convertMysqldate(horater);
                     $("#txtnomevisitante").val(name);
+                    $("#txtrgvisitante").val(rg);
                     $("#txtcpfvisitante").val(cpf);
                     $("#txtphonevisitante").val(phone);
                     $("#txtemailvisitante").val(email);
@@ -3708,7 +3724,7 @@ var ptrContent = $$('.transparenciadecontas');
 // Add 'refresh' listener on it
 ptrContent.on('refresh', function (e) {
 
-        transparenciadecontas();
+        //transparenciadecontas();
         // When loading done, we need to reset it
         myApp.pullToRefreshDone();
 });
@@ -4096,8 +4112,60 @@ function enviartransparencia()
 }
 
 
+///////////////////////////////////// previsao ///////////////////////////
+function previsaocont(){
+
+    myApp.showIndicator();
+    //var datatransparencia;
+    $('#previsaomarecont-cont').html("");
+        var data = new Date();
+        var mes  = data.getMonth()+1;
+        if (mes<10) {
+            mes = "0"+mes;
+        }
+        var ano = data.getFullYear();
+        ano = ano.toString();
+        ano = ano.substr(-2, 2);
+        $.ajax({
+            url: "http://aptohome.com.br/admin/functionAppPrevisao.php?action=listmare&mes="+mes+"&ano="+ano,
+            dataType : "html",
+            success: function(data) {
+
+                $('#previsaomarecont-cont').html(data);
+            
+            },error: function(data) {
+
+                myApp.alert('Erro! Tente novamente.');
+            }
+        });
+
+    $('#previsaotempocont-cont').html("");
+        var data = new Date();
+        var mes  = data.getMonth()+1;
+        if (mes<10) {
+            mes = "0"+mes;
+        }
+        var ano = data.getFullYear();
+        ano = ano.toString();
+        ano = ano.substr(-2, 2);
+        $.ajax({
+            url: "http://aptohome.com.br/admin/functionAppPrevisao.php?action=listtempo",
+            dataType : "html",
+            success: function(data) {
+                myApp.hideIndicator();
+
+                $('#previsaotempocont-cont').html(data);
+            
+            },error: function(data) {
+                myApp.hideIndicator();
+                myApp.alert('Erro! Tente novamente.');
+            }
+        });
+}
+
+
 // Pull to refresh content
-var ptrContent = $$('.enquetes');
+var ptrContent = $$('.enquete');
  
 // Add 'refresh' listener on it
 ptrContent.on('refresh', function (e) {
@@ -4108,7 +4176,7 @@ ptrContent.on('refresh', function (e) {
 });
 
 ///////////////////////////////////// enquetes | assembleia virtual ///////////////////////////
-function enquetes(){
+function enquete(){
 
     myApp.showIndicator();
     //var datatransparencia;
@@ -4129,8 +4197,8 @@ function enquetes(){
                 if (data!=null) {
                     myApp.hideIndicator();
                     var dataservico = "";
-                    var qtd = data.enquetes.length;
-                    var delenquetes = "";
+                    var qtd = data.enquete.length;
+                    var delenquete = "";
                     var invisivel ="invisivel ";
                     var swipeout ="";
 
@@ -4141,17 +4209,17 @@ function enquetes(){
                         invisivel="";
                     }
 
-                        delenquetes = "onclick = delservico('"+data.enquetes[i].guid+"',"+i+");"
-                        dataservico += '<li class="'+swipeout+' swipeout-enquetes" data-index="'+i+'">'+
-                                                  '<a href="#servicocont" onclick="enquetescont('+data.enquetes[i].idServico+')" class="swipeout-content item-link item-content">'+
+                        delenquete = "onclick = delservico('"+data.enquete[i].guid+"',"+i+");"
+                        dataservico += '<li class="'+swipeout+' swipeout-enquete" data-index="'+i+'">'+
+                                                  '<a href="#servicocont" onclick="enquetescont('+data.enquete[i].idServico+')" class="swipeout-content item-link item-content">'+
                                                     '<div class="item-media">'+
-                                                      '<img src="'+data.enquetes[i].urlServico+'" >'+
+                                                      '<img src="'+data.enquete[i].urlServico+'" >'+
                                                     '</div>'+
                                                     '<div class="item-inner">'+
                                                       '<div class="item-title-row">'+
-                                                        '<div class="item-title">'+data.enquetes[i].tituloServico+'</div>'+
+                                                        '<div class="item-title">'+data.enquete[i].tituloServico+'</div>'+
                                                       '</div>'+
-                                                      '<div class="item-text">'+data.enquetes[i].descricaoServico+'</div>'+
+                                                      '<div class="item-text">'+data.enquete[i].descricaoServico+'</div>'+
                                                     '</div>'+
                                                   '</a>'+
                                                     '<div class="'+invisivel+'swipeout-actions-right">'+
@@ -4162,25 +4230,25 @@ function enquetes(){
                     }
                 }else{
                     myApp.hideIndicator();
-                    $('#enquetes-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
+                    $('#enquete-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
                 }
             },error: function(data) {
                 myApp.hideIndicator();
-                $('#enquetes-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
+                $('#enquete-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
             }
         });
     //alert("Entrei");
 }
 
-/////////////////////////////////////  deletar servico ///////////////////////////
-function delservico(guid,eq){
+/////////////////////////////////////  deletar enquete ///////////////////////////
+function delenquete(guid,eq){
 
     myApp.confirm('Deseja deletar esse item?', function () {
 
         myApp.showIndicator();
 
         $.ajax({
-            url: $server+"functionAppServico.php?guid="+guid+"&action=deletar",
+            url: $server+"functionAppEnquete.php?guid="+guid+"&action=deletar",
             data : "get",
             success: function(data) {
             if (data!="ok") {
@@ -4201,15 +4269,15 @@ function delservico(guid,eq){
 
 }
 
-///////////////////////////////////// servico conteudo ///////////////////////////
-function servicocont(id){
+///////////////////////////////////// enquete conteudo ///////////////////////////
+function enquetecont(id){
 
     myApp.showIndicator();
     //var dataservico;
     $('#servicocont-cont').html("");
 
         $.ajax({
-            url: $server+"functionAppServico.php?idservico="+id+"&action=list",
+            url: $server+"functionAppEnquete.php?idservico="+id+"&action=list",
             dataType : "json",
             success: function(data) {
             myApp.hideIndicator();
@@ -4275,9 +4343,9 @@ function servicocont(id){
 
 ///////////////////////////// camera servico ///////////////////////////
 
-function cameraServico() {
+function cameraEnquete() {
 // Take picture using device camera and retrieve image as base64-encoded string
-    navigator.camera.getPicture(onSuccessServico, onFailServico, {
+    navigator.camera.getPicture(onSuccessEnquete, onFailEnquete, {
     quality: 80,
     allowEdit : true,
     targetWidth: 1500,
@@ -4288,9 +4356,9 @@ function cameraServico() {
 }
 
  
-function cameraFileServico(source) {
+function cameraFileEnquete(source) {
 // Retrieve image file location from specified source
-    navigator.camera.getPicture(onSuccessServico, onFailServico, {
+    navigator.camera.getPicture(onSuccessEnquete, onFailEnquete, {
     quality: 50,
     allowEdit: true,
     targetWidth: 1000,
@@ -4300,18 +4368,18 @@ function cameraFileServico(source) {
 }
 // Called if something bad happens.
 //
-function onSuccessServico(imageData) {
+function onSuccessEnquete(imageData) {
     var image = document.getElementById('preview-servico');
     image.src = "data:image/jpeg;base64," + imageData;
 }
-function onFailServico(message) {
+function onFailEnquete(message) {
 //alert('Failed because: ' + message);
 }
 
 ///////////////////////////// camera servico options ///////////////////////////
 
 /* ===== Action sheet, we use it on few pages ===== */
-myApp.onPageInit('inserirservico', function (page) {
+myApp.onPageInit('inserirenquete', function (page) {
     var actionOptionCameraServico = [
         // First buttons group
         [
@@ -4351,10 +4419,10 @@ myApp.onPageInit('inserirservico', function (page) {
 });
 
 ///////////////////////////// acao inserir servico ///////////////////////////
-$('#butinserirservico').on('click', function(){
+$('#butinserenquete').on('click', function(){
     //alert("enviar");
 
-    if (($$('#txttitservico').val()!="") && ($$('#txtdescricaoservico').val()!="") && ($$('#txtphoneservico').val()!="")) {
+    if (($$('#txttitenquete').val()!="") && ($$('#txtdescricaoenquete').val()!="") && ($$('#txtphoneenquete').val()!="")) {
 
             enviarservico();
 
@@ -4364,8 +4432,8 @@ $('#butinserirservico').on('click', function(){
 
 });
 
-///////////////////////////// inserir servico ///////////////////////////
-function enviarservico()
+///////////////////////////// inserir enquete ///////////////////////////
+function enviarenquete()
 {
  
  //alert("entrei");
@@ -4387,7 +4455,7 @@ function enviarservico()
 
         myApp.showIndicator();
         // Salvando imagem no servidor
-        $.ajax($server+'functionAppServico.php?', {
+        $.ajax($server+'functionAppEnquete.php?', {
             type: "post",
             data: "imagem="+imagem+"&idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&idbloco="+$$idbloco+"&txtTitulo="+$$txtTitulo+"&txtPhone="+$$txtPhone+"&txtDescricao="+$$txtDescricao+"&action=add",
         })
@@ -4549,12 +4617,16 @@ function servicocont(id){
                                             '</div>';
                 }
                 var condominioNome = "";
-                if (localStorage.getItem("condominioNome")) {
-                    condominioNome = localStorage.getItem("condominioNome");
-                }else if (localStorage.getItem("sindicoCondominioNome")){
-                    condominioNome = localStorage.getItem("sindicoCondominioNome");
+                if (localStorage.getItem("condominioNome") && localStorage.getItem("sindicoCondominioNome")) {
+                    $$condominioNome = localStorage.getItem("sindicoCondominioNome");
+                }else if (localStorage.getItem("condominioNome") && localStorage.getItem("administradoraCondominioNome")) {
+                    $$condominioNome = localStorage.getItem("administradoraCondominioNome");
+                }else if (localStorage.getItem("condominioNome")) {
+                    $$condominioNome = localStorage.getItem("condominioNome");
+                }else if (localStorage.getItem("sindicoCondominioNome")) {
+                    $$condominioNome = localStorage.getItem("sindicoCondominioNome");
                 }else if (localStorage.getItem("administradoraCondominioNome")) {
-                    condominioNome = localStorage.getItem("administradoraCondominioNome");
+                    $$condominioNome = localStorage.getItem("administradoraCondominioNome");
                 }
                 dataservico += '<li>'+
                                         '<div class="card-cont ks-facebook-card">'+ imgServico +
@@ -4563,7 +4635,7 @@ function servicocont(id){
                                                     '<img src="'+data.servico[i].urlSindico+'" width="34">'+
                                                 '</div>'+
                                                 '<div class="ks-facebook-name">'+data.servico[i].nameSindico+'</div>'+
-                                                '<div class="ks-facebook-date">Condomínio: '+condominioNome+'</div>'+
+                                                '<div class="ks-facebook-date">Condomínio: '+$$condominioNome+'</div>'+
                                             '</div>'+
                                             '<div class="card-content-inner">'+
                                                 '<p class="facebook-title">'+data.servico[i].tituloServico+'</p>'+
@@ -4850,7 +4922,11 @@ function delcronograma(guid,eq){
 function cronogramacont(id){
 
     myApp.showIndicator();
-    if (localStorage.getItem("condominioNome")) {
+    if (localStorage.getItem("condominioNome") && localStorage.getItem("sindicoCondominioNome")) {
+        $$condominioNome = localStorage.getItem("sindicoCondominioNome");
+    }else if (localStorage.getItem("condominioNome") && localStorage.getItem("administradoraCondominioNome")) {
+        $$condominioNome = localStorage.getItem("administradoraCondominioNome");
+    }else if (localStorage.getItem("condominioNome")) {
         $$condominioNome = localStorage.getItem("condominioNome");
     }else if (localStorage.getItem("sindicoCondominioNome")) {
         $$condominioNome = localStorage.getItem("sindicoCondominioNome");
@@ -5476,7 +5552,7 @@ $('#alertavisitanteshome-cont').html("");
                     $('#alertavisitanteshome-cont').html($$datavisitante);
                     //console.log("$$datavisitante = "+$$datavisitante);
                 }
-                alertaportaria();
+                //alertaportaria();
             },error: function(data) {
             }
         });
@@ -5520,10 +5596,12 @@ $('#alertavisitanteshome-cont').html("");
                         reorderAlert();
 
                 },error: function(data) {
+                    myApp.hideIndicator();
+                    myApp.alert('Erro! Tente novamente.');
                 }
             });
             
-            setTimeout(visitantealerthome, 300000);
+            //setTimeout(visitantealerthome, 300000);
             //console.log("datavisitante="+$$datavisitante);
         }
 
@@ -6063,6 +6141,46 @@ $('#butinserirvisitante').on('click', function(){
 ///////////////////////////// autocomplete nome visitante ///////////////////////////////
 
     myApp.onPageInit('inserirvisitante', function (page) {
+        console.log("inserirvisitante");
+        // Fruits data demo array
+        // var nomesVisitantes = ('Apple Apricot Avocado Banana Melon Orange Peach Pear Pineapple').split(' ');
+        var nomesVisitantes = "";
+        var idsVisitantes = "";
+
+            $.ajax({
+                url: $server+"functionAppVisitante.php?idcondominio="+localStorage.getItem("condominioId")+"&status=0&action=listall",
+                dataType : "json",
+                success: function(data) {
+                    if (data!=null) {
+                        myApp.hideIndicator();
+                        var datavisitante = "";
+                        var qtd = data.visitante.length;
+                        var delvisitante ="";
+                        var cor="";
+
+                        var name ="";
+                        var email ="";
+                        var exibecont = "";
+                        for (var i = 0; i < qtd; i++) {
+
+                            name = data.visitante[i].name ? data.visitante[i].name : "";
+                            nomesVisitantes += name+",";
+                            idsVisitantes += data.visitante[i].idvisitante+",";
+                        }
+                    }
+                    localStorage.setItem("nomesVisitantes", nomesVisitantes);
+                    localStorage.setItem("idsVisitantes", idsVisitantes);
+                    //console.log("nomesVisitantes = "+nomesVisitantes);
+                    //console.log("idsVisitantes = "+idsVisitantes);
+                    autocompletevisitante();
+                },error: function(data) {
+
+                }
+            });
+    });
+
+    myApp.onPageReinit('inserirvisitante', function (page) {
+        console.log("inserirvisitante");
         // Fruits data demo array
         // var nomesVisitantes = ('Apple Apricot Avocado Banana Melon Orange Peach Pear Pineapple').split(' ');
         var nomesVisitantes = "";
@@ -6164,6 +6282,7 @@ function enviarvisitante()
         }
         $$txtNomeVisitante = $$('#txtnomevisitante').val();
         $$txtEmailVisitante = $$('#txtemailvisitante').val();
+        $$txtRgVisitante = $$('#txtrgvisitante').val();
         $$txtCpfVisitante = $$('#txtcpfvisitante').val();
         $$txtPhoneVisitante = $$('#txtphonevisitante').val();
         if (localStorage.getItem("portariaIdportaria")) {
@@ -6187,7 +6306,7 @@ function enviarvisitante()
         // Salvando visitante servidor
         $.ajax($server+'functionAppVisitante.php?', {
             type: "post",
-            data: "portaria="+$$portaria+"&imagem="+imagem+"&idcondominio="+$$idcondominio+"&guid="+$$guid+"&idbloco="+$$idbloco+"&iddomicilio="+$$iddomicilio+"&txtNomeVisitante="+$$txtNomeVisitante+"&txtEmailVisitante="+$$txtEmailVisitante+"&txtCpfVisitante="+$$txtCpfVisitante+"&txtPhoneVisitante="+$$txtPhoneVisitante+"&txtTipoVisitante="+$$txtTipoVisitante+"&txtHoraInicio="+$$txtHoraInicio+"&txtHoraTermino="+$$txtHoraTermino+"&action=add",
+            data: "portaria="+$$portaria+"&imagem="+imagem+"&idcondominio="+$$idcondominio+"&guid="+$$guid+"&idbloco="+$$idbloco+"&iddomicilio="+$$iddomicilio+"&txtNomeVisitante="+$$txtNomeVisitante+"&txtEmailVisitante="+$$txtEmailVisitante+"&txtCpfVisitante="+$$txtCpfVisitante+"&txtRgVisitante="+$$txtRgVisitante+"&txtPhoneVisitante="+$$txtPhoneVisitante+"&txtTipoVisitante="+$$txtTipoVisitante+"&txtHoraInicio="+$$txtHoraInicio+"&txtHoraTermino="+$$txtHoraTermino+"&action=add",
         })
           .fail(function() {
             myApp.hideIndicator();
@@ -10927,11 +11046,15 @@ console.log("dia = "+dia+" local = "+idlocalespaco);
         }
 
         //se sindico for morador do condominio selecionado
-        if (localStorage.getItem("sindicoIdsindico")) {
+        /*if (localStorage.getItem("sindicoIdsindico")) {
             if (localStorage.getItem("moradorIdCondominio")!=localStorage.getItem("condominioId")) {
                 $('.inseriragendamentodeespaco').addClass('invisivel');
             }
+        }*/
+        if (localStorage.getItem("sindicoCondominioId") || localStorage.getItem("administradoraCondominioId")) {
+            $('.inseriragendamentodeespaco').removeClass('invisivel');
         }
+        
 
 
         $.ajax({
@@ -11154,7 +11277,9 @@ function espacocont(id,push){
                         dataini[2] = dataini[2].substring(1); 
                     }
 
-                    dataini = dataini[0]+"-"+dataini[1]+"-"+dataini[2];
+                    // hack subtrai 1 do mês (que vem da console), futuramente zerar hack aqui e na console
+                    var meshack = dataini[1]-1;
+                    dataini = dataini[0]+"-"+meshack+"-"+dataini[2];
 
                     horaini = horaini.substring(0,5);
                     horater = horater.substring(0,5);
@@ -11201,7 +11326,7 @@ function espacocont(id,push){
 
 $('.inseriragendamentodeespaco').on('click', function(){
     console.log("inseriragendamentodeespaco");
-    if (localStorage.getItem("portariaIdportaria")) {
+    if (localStorage.getItem("portariaIdportaria") || localStorage.getItem("sindicoCondominioId") || localStorage.getItem("administradoraCondominioId")) {
         $('.blocolistagendamentoli').show();
         $('.domiciliolistagendamentoli').hide();
         $('.moradorlistagendamentoli').hide();
@@ -11369,7 +11494,7 @@ function valorestaxasagendamento(){
 
                 if (data!=null) {
                     if (data.taxa[0].valorTaxa=="" || data.taxa[0].valorTaxa=="0.00" || data.taxa[0].valorTaxa==null) {
-                        $('#valorTaxa').html("Espaço gratuito");
+                        $('#valorTaxa').html("Gratuito");
                     }else{
                         $('#valorTaxa').html(data.taxa[0].valorTaxa);
                     }
@@ -11379,7 +11504,16 @@ function valorestaxasagendamento(){
                     }else{
                         $('.descricaoTaxa').hide();
                     }
-                }              
+                }
+                if (data.taxa[0].nomeTaxa=="Camareira") {
+                    $(".agenhoraini").hide();
+                    $(".agenhorater").hide();
+                    $(".agenhorainiperi").show();
+                }else{
+                    $(".agenhoraini").show();
+                    $(".agenhorater").show();
+                    $(".agenhorainiperi").hide();
+                }
             },error: function(data) {
                 //myApp.hideIndicator();
                 //$('#banner-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
@@ -11391,16 +11525,47 @@ function valorestaxasagendamento(){
 ///////////////////////////// acao inserir espaco ///////////////////////////
 $$('#butinseriragendamento').on('click', function(){
 
-    if (($$('#horainicoagendamento').val()!="00:00") &&  ($$('#horaterminoagendamento').val()!="00:00")) {
-        if ($$('#horaterminoagendamento').val()<$$('#horainicoagendamento').val()) {
-            myApp.alert('Hora término deve ser maior que hora início'); 
-        } else if ($$('#horaterminoagendamento').val()==$$('#horainicoagendamento').val()) {
-             myApp.alert('Hora início e término devem ser diferentes'); 
-        } else{
-            enviarespaco();
+    if (localStorage.getItem("portariaIdportaria") || localStorage.getItem("sindicoCondominioId") || localStorage.getItem("administradoraCondominioId")) {
+        if ($$("#blocolistagendamento").val()!="" && $$("#domiciliolistagendamento").val()!="" && $$("#moradorlistagendamento").val()!=""){
+            $$ok = true;
+        }else{
+            $$ok = false;
+        }
+    }
+    
+    if(!$('.agenhorainiperi').is(':visible')){
+        if (($$('#horainicoagendamento').val()!="00:00") &&  ($$('#horaterminoagendamento').val()!="00:00")) {
+            if ($$('#horaterminoagendamento').val()<$$('#horainicoagendamento').val()) {
+                myApp.alert('Hora término deve ser maior que hora início', 'Aptohome');
+                $$ok = false;
+            } else if ($$('#horaterminoagendamento').val()==$$('#horainicoagendamento').val()) {
+                myApp.alert('Hora início e término devem ser diferentes', 'Aptohome'); 
+                $$ok = false;
+            }else{
+                $$ok = true;
+            }
+        }else{
+            $$ok = false;
         }
     }else{
-        myApp.alert('Preencha todos os campos.');    
+        if ($$('#turnoinicoagendamento').val()!="") {
+            if ($$('#turnoinicoagendamento').val()=="08:00") {
+                $$('#horainicoagendamento').val("08:00");
+                $$('#horaterminoagendamento').val("12:00");
+            }else{
+                $$('#horainicoagendamento').val("14:00");
+                $$('#horaterminoagendamento').val("18:00");
+            }
+            $$ok = true;
+        }else{
+            myApp.alert('Preencha todos os campos!', 'Aptohome');
+            $$ok = false;
+        }        
+    }
+
+
+    if ($$ok==true) {
+        enviarespaco();
     }
 
 });
@@ -11410,7 +11575,7 @@ function enviarespaco()
 {
         $$idcondominio = localStorage.getItem("condominioId");
     
-        if (localStorage.getItem("portariaIdportaria")) {
+        if (localStorage.getItem("portariaIdportaria") || localStorage.getItem("sindicoCondominioId") || localStorage.getItem("administradoraCondominioId")) {
             $$iddomicilio = $$("#domiciliolistagendamento").val();
             $$idmorador = $$("#moradorlistagendamento").val();
         }else{
@@ -11622,7 +11787,25 @@ function limpar()
                 //$('#push').html(data);
                 if (data.additionalData.foreground) {
 
-                    console.log('CAPTURADO PUSH COM APP ABERTO!');
+                    switch( data.additionalData.info ){
+
+                        case 'comunportaria':
+                            comunportariahome();
+                        break;
+
+                        case 'alertadechegada':
+                            alertadechegadahome();
+                        break;
+
+                        case 'alertaportaria':
+                            visitantealerthome();
+                        break;
+
+                        case 'visitanteportaria':
+                            searchhomeportaria();
+                        break;
+                    }
+                    
                     if (data.title==data.additionalData.summaryText) {
                         data.additionalData.summaryText="";
                     }
@@ -11695,9 +11878,16 @@ function limpar()
                                 mainView.router.load({pageName: 'alertadechegadacont'});
                                 alertadechegadacont(data.additionalData.id,true);
                                 break;
+
+                                case 'alertaportaria':
+                                mainView.router.load({pageName: 'alertaportariahomecont'});
+                                alertaportariacont(data.additionalData.id,true);
+                                break;
                             }
                         }
                     });
+
+                    console.log('CAPTURADO PUSH COM APP ABERTO!');
                 } else if (data.additionalData.coldstart){
                             switch( data.additionalData.info ){
                                 case 'comuncomunicado':
@@ -11733,6 +11923,11 @@ function limpar()
                                 case 'alertadechegada':
                                 mainView.router.load({pageName: 'alertadechegadacont'});
                                 alertadechegadacont(data.additionalData.id,true);
+                                break;
+
+                                case 'alertaportaria':
+                                mainView.router.load({pageName: 'alertaportariahomecont'});
+                                alertaportariacont(data.additionalData.id,true);
                                 break;
                             }
 
@@ -11772,6 +11967,11 @@ function limpar()
                                 case 'alertadechegada':
                                 mainView.router.load({pageName: 'alertadechegadacont'});
                                 alertadechegadacont(data.additionalData.id,true);
+                                break;
+
+                                case 'alertaportaria':
+                                mainView.router.load({pageName: 'alertaportariahomecont'});
+                                alertaportariacont(data.additionalData.id,true);
                                 break;
                             }
                         console.log('CAPTURADO PUSH COM APP EM BACKGROUND!');  
