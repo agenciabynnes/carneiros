@@ -2344,8 +2344,33 @@ function exibecamerasdeseguranca(data){
 }
 
 //////////////////////////////// boletos ////////////////////////////////
-function boletos(){
-    $(".iframe-boleto").attr("src","https://actaapp.com21.com.br");
+function boleto(){
+    myApp.showIndicator();
+
+        $.ajax({
+            url: $server+"functionAppBoleto.php?idcondominio="+localStorage.getItem("condominioId")+"&action=list",
+            dataType : "json",
+            success: function(data) {
+                //console.log(data);
+                if (data!=null) {
+                    var qtd = data.boleto.length;
+
+                    for (var i = 0; i < qtd; i++) {
+
+                        $(".iframe-boleto").attr("src",data.boleto[i].url);
+                        //$(".iframe-boleto").attr("src","https://actaapp.com21.com.br");
+
+                        $('.iframe-boleto').on("load", function() {
+                            myApp.hideIndicator();
+                        });
+                    }
+                }
+            }
+             ,error:function(data){
+                console.log(data);
+                myApp.hideIndicator();
+             }
+        });
 }
 
 // Pull to refresh content
@@ -5449,6 +5474,10 @@ function enviaraddmorador()
 ///////////////////////////// inserir morador teste///////////////////////////
 $$('#cadastro-teste').on('click', function(){
  
+        myApp.showIndicator();
+
+        if ($$('#txtcodcondominio').val()=="") {
+ 
         $$idcondominio = "57";
         $$idbloco = "1996";
         $$iddomicilio = "9335";
@@ -5459,33 +5488,86 @@ $$('#cadastro-teste').on('click', function(){
         //$$fileUpload = "fterte";
         //myApp.showPreloader();
 
-        $('#formaddmoradorteste').each (function(){
-          this.reset();
-        });
+            $('#formaddmoradorteste').each (function(){
+              this.reset();
+            });
 
-        myApp.showIndicator();
-        // Salvando imagem no servidor
-        $.ajax($server+'functionAppMorador.php?', {
-            type: "post",
-            data: "idcondominio="+$$idcondominio+"&idbloco="+$$idbloco+"&iddomicilio="+$$iddomicilio+"&txtNomeAddMorador="+$$txtNomeAddMorador+"&txtEmailAddMorador="+$$txtEmailAddMorador+"&cellPhoneaddMorador="+$$cellPhoneaddMorador+"&action=addMorador",
-        })
-          .fail(function() {
-            myApp.hideIndicator();
-            myApp.alert('Erro! Tente novamente.');
-          })     
-          .done(function(data) {
-            if (data=="ok") {
-               myApp.hideIndicator();
-                myApp.alert('Morador teste cadastrado com sucesso!<br><br>Você receberá um email de confirmação para criar sua senha (Caso não receba, verificar na pasta SPAM).', function () { myApp.closeModal('.popup.modal-in');});
-            } else if (data=="erro"){
+            // Salvando imagem no servidor
+            $.ajax($server+'functionAppMorador.php?', {
+                type: "post",
+                data: "idcondominio="+$$idcondominio+"&idbloco="+$$idbloco+"&iddomicilio="+$$iddomicilio+"&txtNomeAddMorador="+$$txtNomeAddMorador+"&txtEmailAddMorador="+$$txtEmailAddMorador+"&cellPhoneaddMorador="+$$cellPhoneaddMorador+"&action=addMorador",
+            })
+              .fail(function() {
                 myApp.hideIndicator();
                 myApp.alert('Erro! Tente novamente.');
-            } else {
-                myApp.hideIndicator();
-                myApp.alert(data);
-            }
+              })     
+              .done(function(data) {
+                if (data=="ok") {
+                   myApp.hideIndicator();
+                    myApp.alert('Morador cadastrado com sucesso!<br><br>Você receberá um email de confirmação para criar sua senha (Caso não receba, verificar na pasta SPAM).', function () { myApp.closeModal('.popup.modal-in');});
+                } else if (data=="erro"){
+                    myApp.hideIndicator();
+                    myApp.alert('Erro! Tente novamente.');
+                } else {
+                    myApp.hideIndicator();
+                    myApp.alert(data);
+                }
 
-          });
+              });
+
+        }else{
+
+            // verifica se cod do condomínio existe
+            $.ajax({
+                url: $server+"functionAppCondominio.php?codCond="+$$('#txtcodcondominio').val()+"&action=codcond",
+                dataType : "json",
+                success: function(data) {
+                    console.log("cod cond = "+data);
+                    if (data!="erro") {
+
+                        $$idcondominio = data;
+                        $$txtNomeAddMorador = $$('#txtnomeaddmoradorteste').val();
+                        $$txtEmailAddMorador = $$('#txtemailaddmoradorteste').val();
+                        $$cellPhoneaddMorador = $$('#cellphoneaddmoradorteste').val();
+
+                        $('#formaddmoradorteste').each (function(){
+                          this.reset();
+                        });
+
+
+                        // Salvando morador
+                        $.ajax($server+'functionAppMorador.php?', {
+                            type: "post",
+                            data: "idcondominio="+$$idcondominio+"&txtNomeAddMorador="+$$txtNomeAddMorador+"&txtEmailAddMorador="+$$txtEmailAddMorador+"&cellPhoneaddMorador="+$$cellPhoneaddMorador+"&action=addMorador",
+                        })
+                          .fail(function() {
+                            myApp.hideIndicator();
+                            myApp.alert('Erro! Tente novamente.');
+                          })     
+                          .done(function(data) {
+                            if (data=="ok") {
+                               myApp.hideIndicator();
+                                myApp.alert('Morador cadastrado com sucesso!<br><br>Você receberá um email de confirmação para criar sua senha (Caso não receba, verificar na pasta SPAM).', function () { myApp.closeModal('.popup.modal-in');});
+                            } else if (data=="erro"){
+                                myApp.hideIndicator();
+                                myApp.alert('Erro! Tente novamente.');
+                            } else {
+                                myApp.hideIndicator();
+                                myApp.alert(data);
+                            }
+
+                          });
+                    }else{
+                        myApp.hideIndicator();
+                        myApp.alert('Condomínio não encontrado! Informe outro código ou deixe esse campo em branco para se cadastrar no condomínio MODELO.');
+                    }
+                },error: function(data) {
+                        myApp.hideIndicator();
+                        myApp.alert('Condomínio não encontrado! Informe outro código ou deixe esse campo em branco para se cadastrar no condomínio MODELO.');
+                }
+            });
+        }
+
 });
 
 // Pull to refresh content
@@ -12379,12 +12461,12 @@ $('.buttonshare').hide();
                 directionsService,
                 mapCenter,
                 directionsDisplay;
-                //mapCenter = new google.maps.LatLng(40.700683, -73.925972);
+                mapCenter = new google.maps.LatLng(-14.384672, -51.929947);
 
-            navigator.geolocation.getCurrentPosition(mapCenterInt);
+            /*navigator.geolocation.getCurrentPosition(mapCenterInt);
                 function mapCenterInt(){
                     mapCenter = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
-                }
+                }*/
 
             function initializeMap()
             {
@@ -12393,9 +12475,10 @@ $('.buttonshare').hide();
                 directionsService = new google.maps.DirectionsService;
                 directionsDisplay = new google.maps.DirectionsRenderer;
                 map = "";
+                mapCenter = new google.maps.LatLng(-14.384672, -51.929947);
                 map = new google.maps.Map(document.getElementById('map-canvas'), {
-                   //zoom: 17,
-                   //center: mapCenter,
+                   zoom: 4,
+                   center: mapCenter,
                    disableDefaultUI: true,
                    mapTypeId: google.maps.MapTypeId.ROADMAP
                  });
@@ -12809,12 +12892,12 @@ $('.buttonshare').hide();
                 directionsService,
                 mapCenter,
                 directionsDisplay;
-                //mapCenter = new google.maps.LatLng(40.700683, -73.925972);
+                mapCenter = new google.maps.LatLng(-14.384672, -51.929947);
 
-            navigator.geolocation.getCurrentPosition(mapCenterInt);
+            /*navigator.geolocation.getCurrentPosition(mapCenterInt);
                 function mapCenterInt(){
                     mapCenter = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
-                }
+                }*/
 
             function initializeMap()
             {
@@ -12823,12 +12906,14 @@ $('.buttonshare').hide();
                 directionsService = new google.maps.DirectionsService;
                 directionsDisplay = new google.maps.DirectionsRenderer;
                 map = "";
+                mapCenter = new google.maps.LatLng(-14.384672, -51.929947);
                 map = new google.maps.Map(document.getElementById('map-canvas'), {
-                   //zoom: 17,
-                   //center: mapCenter,
+                   zoom: 4,
+                   center: mapCenter,
                    disableDefaultUI: true,
                    mapTypeId: google.maps.MapTypeId.ROADMAP
                  });
+
 
                 directionsDisplay.setMap(map);
                 calculateAndDisplayRoute(directionsService, directionsDisplay);

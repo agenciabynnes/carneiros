@@ -71,7 +71,7 @@
                         <a href="#agendamentodeespaco" class="panel-close agendamentodeespaco" onclick="agendamentodeespaco();PageButtonClicked('Agendamento de Espaço')"><i class="icon fa fa-calendar fa-lg color-red"></i>AGENDAMENTO DE ESPAÇOS</a>
                     </li>
                     <li class="menuboletos">
-                        <a href="#boletos" class="panel-close" onclick="boletos();PageButtonClicked('Boletos')"><i class="icon fa fa-file-text-o fa-lg color-lightgreen"></i>BOLETOS</a>
+                        <a href="#boletos" class="panel-close" onclick="boleto();PageButtonClicked('Boletos')"><i class="icon fa fa-file-text-o fa-lg color-lightgreen"></i>BOLETOS</a>
                     </li>
                     <!--<li class="menupagamentos">
                         <a href="#pagamentos" class="panel-close" onclick="pagamentos();PageButtonClicked('Pagamentos')"><i class="icon fa fa-credit-card fa-lg color-lightgreen"></i>PAGAMENTO DE CONTAS</a>
@@ -154,7 +154,7 @@
                         <a href="#agendamentodeespaco" class="item-link agendamentodeespaco" onclick="agendamentodeespaco();PageButtonClicked('Agendamento de Espaços')"><i class="icon fa fa-calendar fa-3x badgeespaco color-red"></i><br>AGENDAMENTO<br>DE ESPAÇOS</a>
                     </li>
                     <li class="menuboletos">
-                        <a href="#boletos" onclick="boletos();PageButtonClicked('Boletos')" class="item-link"><i class="icon fa fa-file-text-o fa-3x color-lightgreen"></i><br>BOLETOS<br>DO CONDOMÍNIO</a>
+                        <a href="#boletos" onclick="boleto();PageButtonClicked('Boletos')" class="item-link"><i class="icon fa fa-file-text-o fa-3x color-lightgreen"></i><br>BOLETOS<br>DO CONDOMÍNIO</a>
                     </li>
                     <!--<li class="menupagamentos">
                         <a href="#pagamentos" onclick="pagamentos();PageButtonClicked('Pagamentos')" class="item-link"><i class="icon fa fa-credit-card fa-3x color-lightgreen"></i><br>PAGAMENTO<br>DE CONTAS</a>
@@ -3232,9 +3232,17 @@
                 <ul>
                 <li>
                   <div class="content text-cadastro">
-                    <p>Preencha seus dados e clique em cadastrar. Você receberá um email de confirmação para criar sua senha.</p>
+                    <p>Solicite ao síndico o código do seu condomínio (Deixe esse campo em branco para se cadastrar no condomínio MODELO). Após o cadastro, você receberá um email de confirmação para criar sua senha.</p>
                   </div>
                 </li>
+                  <li class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">Código do condomínio</div>
+                      <div class="item-input">
+                        <input type="text" name="txtcodcondominio" id="txtcodcondominio" autocomplete="on" autocorrect="on" autocapitalize="off" spellcheck="true" onKeyUp="tabenter(event,getElementById('txtnomeaddmoradorteste'))" placeholder="Digite o código do seu condomínio">
+                      </div>
+                    </div>
+                  </li>
                   <li class="item-content">
                     <div class="item-inner">
                       <div class="item-title label">Nome</div>
