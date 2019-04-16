@@ -1124,6 +1124,7 @@ position: fixed;
 	display: block;
 	/*margin-bottom: -6px!important;*/
 	padding: 2px;
+	height: 180px;
 }
 .img-banner a div {
 	display: block;
@@ -1131,9 +1132,11 @@ position: fixed;
     padding: 5px;
     text-overflow: ellipsis;
     overflow-x: hidden;
-    position: relative;
     white-space: nowrap;
     font-size: 12px;
+position: absolute!important;
+    width: calc(100% - 14px);
+    bottom: 0;
 }
 .img-banner {
 	width: 33.333%;
@@ -1172,6 +1175,9 @@ position: fixed;
 	}
 	.media-list {
 	    margin-bottom: 80px!important;
+	}
+	.img-banner a{
+		height: 260px;
 	}
 }
 

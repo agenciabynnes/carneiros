@@ -996,30 +996,36 @@ function atualizartokenPortaria(data){
 function sair() {
     myApp.confirm('Deseja realmente sair?', function () {
 
-        if (localStorage.getItem("sindicoIdsindico") && localStorage.getItem("moradorIdmorador")) {
-            localStorage.setItem("sindicoIdsindico", "");
-            localStorage.setItem("moradorIdmorador", "");
-            atualizartokenSair();
-            atualizartokenSindicoSair();
+        if (!navigator.onLine) {
+            localStorage.clear();
+            window.location = "index.html";
+        }else{
+
+            if (localStorage.getItem("sindicoIdsindico") && localStorage.getItem("moradorIdmorador")) {
+                localStorage.setItem("sindicoIdsindico", "");
+                localStorage.setItem("moradorIdmorador", "");
+                atualizartokenSair();
+                atualizartokenSindicoSair();
+            }
+            if (localStorage.getItem("portariaIdportaria")) {
+                localStorage.setItem("portariaIdportaria", "");
+                atualizartokenPortariaSair();
+            }
+            if (localStorage.getItem("administradoraIdadministradora")) {
+                localStorage.setItem("administradoraIdadministradora", "");
+                atualizartokenAdministradoraSair();
+            }
+            if (localStorage.getItem("sindicoIdsindico") && !localStorage.getItem("moradorIdmorador")) {
+                localStorage.setItem("sindicoIdsindico", "");
+                atualizartokenSindicoSair();
+            }
+            if (!localStorage.getItem("sindicoIdsindico") && localStorage.getItem("moradorIdmorador")) {
+                localStorage.setItem("moradorIdmorador", "");
+                atualizartokenSair();
+            }
+            //localStorage.clear();
+            //window.location = "index.html";
         }
-        if (localStorage.getItem("portariaIdportaria")) {
-            localStorage.setItem("portariaIdportaria", "");
-            atualizartokenPortariaSair();
-        }
-        if (localStorage.getItem("administradoraIdadministradora")) {
-            localStorage.setItem("administradoraIdadministradora", "");
-            atualizartokenAdministradoraSair();
-        }
-        if (localStorage.getItem("sindicoIdsindico") && !localStorage.getItem("moradorIdmorador")) {
-            localStorage.setItem("sindicoIdsindico", "");
-            atualizartokenSindicoSair();
-        }
-        if (!localStorage.getItem("sindicoIdsindico") && localStorage.getItem("moradorIdmorador")) {
-            localStorage.setItem("moradorIdmorador", "");
-            atualizartokenSair();
-        }
-        //localStorage.clear();
-        //window.location = "index.html";
     });
 }
 
@@ -1237,6 +1243,7 @@ function modulos(){
         if (localStorage.getItem("sindicoIdsindico") && !localStorage.getItem("moradorIdmorador")) {
             $$(".menualerta").addClass("invisivel");
             $$(".menucadastros").addClass("invisivel");
+            $$("#butinserirrespenquetes").hide();
             //alert("sindico");
         }
 
@@ -1255,6 +1262,7 @@ function modulos(){
             $$('.menucamera').addClass('invisivel');
             $$('.menuanuncios').addClass('invisivel');
             $$('.menubanner').addClass('invisivel');
+            $$("#butinserirrespenquetes").hide();
             //alert("admin");
         }
 
@@ -1268,6 +1276,8 @@ function modulos(){
             $$('.menuanuncios').addClass('invisivel');
             $$('.menuobanner').addClass('invisivel');
             $$('.menucronograma').addClass('invisivel');
+            $$('.menuboletos').addClass('invisivel');
+            $$("#butinserirrespenquetes").hide();
             //alert("portaria");
         }
 
@@ -1329,13 +1339,16 @@ function modulos(){
                                 localStorage.setItem("popupView",true);
                             break;
                             case '16':
-                                $$(".menuassembleia").addClass("invisivel");
+                                $$(".menuenquetes").addClass("invisivel");
                             break;
                             case '17':
                                 $$(".menuinterfone").addClass("invisivel");
                             break;
                             case '18':
                                 $$(".menupagamentos").addClass("invisivel");
+                            break;
+                            case '19':
+                                $$(".menuboletos").addClass("invisivel");
                             break;
                         }
                     }
@@ -4196,7 +4209,7 @@ function previsaocont(){
 
 
 // Pull to refresh content
-var ptrContent = $$('.enquete');
+var ptrContent = $$('.enquetes');
  
 // Add 'refresh' listener on it
 ptrContent.on('refresh', function (e) {
@@ -4206,8 +4219,8 @@ ptrContent.on('refresh', function (e) {
         myApp.pullToRefreshDone();
 });
 
-///////////////////////////////////// enquetes | assembleia virtual ///////////////////////////
-function enquete(){
+///////////////////////////////////// enquetes ///////////////////////////
+function enquetes(){
 
     myApp.showIndicator();
     //var datatransparencia;
@@ -4215,10 +4228,10 @@ function enquete(){
 
         // retirar botão inserir
         if (localStorage.getItem("moradorIdmorador")) {
-            $('.inserirservico').addClass('invisivel');
+            $('.inserirenquetes').addClass('invisivel');
         }
         if (localStorage.getItem("administradoraIdadministradora") || localStorage.getItem("sindicoIdsindico")) {
-            $('.inserirservico').removeClass('invisivel');
+            $('.inserirenquetes').removeClass('invisivel');
         }
 
         $.ajax({
@@ -4227,9 +4240,10 @@ function enquete(){
             success: function(data) {
                 if (data!=null) {
                     myApp.hideIndicator();
-                    var dataservico = "";
-                    var qtd = data.enquete.length;
-                    var delenquete = "";
+                    var dataenquetes = "";
+                    var qtd = data.enquetes.length;
+                    var delenquetes = "";
+                    var datafim = "";
                     var invisivel ="invisivel ";
                     var swipeout ="";
 
@@ -4239,47 +4253,54 @@ function enquete(){
                         swipeout = "swipeout ";
                         invisivel="";
                     }
-
-                        delenquete = "onclick = delservico('"+data.enquete[i].guid+"',"+i+");"
-                        dataservico += '<li class="'+swipeout+' swipeout-enquete" data-index="'+i+'">'+
-                                                  '<a href="#servicocont" onclick="enquetescont('+data.enquete[i].idServico+')" class="swipeout-content item-link item-content">'+
+                    console.log(data.enquetes[i].dataFim);
+                    if (data.enquetes[i].dataFim!="00/00/0000 ") {
+                        datafim = '<div class="item-text"> Prazo final: '+data.enquetes[i].dataFim+'</div>';
+                    }else{
+                        datafim = "";
+                    }
+                        
+                        delenquetes = "onclick = delenquetes('"+data.enquetes[i].guid+"',"+i+");"
+                        dataenquetes += '<li class="'+swipeout+' swipeout-enquetes" data-index="'+i+'">'+
+                                                  '<a href="#enquetescont" onclick="enquetescont('+data.enquetes[i].idEnquete+')" class="swipeout-content item-link item-content">'+
                                                     '<div class="item-media">'+
-                                                      '<img src="'+data.enquete[i].urlServico+'" >'+
+                                                      '<img src="images/enquete_icone.png" >'+
                                                     '</div>'+
                                                     '<div class="item-inner">'+
                                                       '<div class="item-title-row">'+
-                                                        '<div class="item-title">'+data.enquete[i].tituloServico+'</div>'+
+                                                        '<div class="item-title">'+data.enquetes[i].perguntaEnquete+'</div>'+
                                                       '</div>'+
-                                                      '<div class="item-text">'+data.enquete[i].descricaoServico+'</div>'+
+                                                      datafim+
                                                     '</div>'+
                                                   '</a>'+
                                                     '<div class="'+invisivel+'swipeout-actions-right">'+
-                                                    '<a href="#" '+delservico+' class="action1 bg-red">Delete</a>'+
+                                                    '<a href="#" '+delenquetes+' class="action1 bg-red">Encerrar</a>'+
                                                   '</div>'+
                                                 '</li>';
-                        $('#servico-cont').html(dataservico);
+                        $('#enquetes-cont').html(dataenquetes);
                     }
                 }else{
                     myApp.hideIndicator();
-                    $('#enquete-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
+                    $('#enquetes-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
                 }
             },error: function(data) {
                 myApp.hideIndicator();
-                $('#enquete-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
+                $('#enquetes-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
+                //myApp.alert('Erro! Tente novamente.');
             }
         });
     //alert("Entrei");
 }
 
-/////////////////////////////////////  deletar enquete ///////////////////////////
-function delenquete(guid,eq){
+/////////////////////////////////////  deletar enquetes ///////////////////////////
+function delenquetes(guid,eq){
 
-    myApp.confirm('Deseja deletar esse item?', function () {
+    myApp.confirm('Deseja encerrar essa enquete?', function () {
 
         myApp.showIndicator();
 
         $.ajax({
-            url: $server+"functionAppEnquete.php?guid="+guid+"&action=deletar",
+            url: $server+"functionAppEnquete.php?guid="+guid+"&action=encerrar",
             data : "get",
             success: function(data) {
             if (data!="ok") {
@@ -4287,7 +4308,7 @@ function delenquete(guid,eq){
                 myApp.alert('Erro! Tente novamente ='+data);
             } else {
                 myApp.hideIndicator();
-                myApp.swipeoutDelete($$('li.swipeout-servico').eq($("li.swipeout-servico[data-index="+eq+"]").index()));
+                myApp.swipeoutDelete($$('li.swipeout-enquetes').eq($("li.swipeout-enquetes[data-index="+eq+"]").index()));
                 //myApp.swipeoutDelete($$('li.swipeout-servico').eq(eq));
             }
             
@@ -4301,68 +4322,65 @@ function delenquete(guid,eq){
 }
 
 ///////////////////////////////////// enquete conteudo ///////////////////////////
-function enquetecont(id){
+function enquetescont(id){
 
     myApp.showIndicator();
     //var dataservico;
-    $('#servicocont-cont').html("");
+    $('#enquetecont-cont').html("");
 
         $.ajax({
-            url: $server+"functionAppEnquete.php?idservico="+id+"&action=list",
+            url: $server+"functionAppEnquete.php?idenquete="+id+"&idmorador="+localStorage.getItem("moradorIdmorador")+"&action=listcont",
             dataType : "json",
             success: function(data) {
-            myApp.hideIndicator();
-                var dataservico = "";
-                var qtd = data.servico.length;
-                var imgServico = "";
-                var imgZoom;
-                for (var i = 0; i < qtd; i++) {
+                myApp.hideIndicator();
 
-                       myPhotoBrowserServicos = myApp.photoBrowser({
-                            theme: 'dark',
-                            ofText: 'de',
-                            backLinkText: '',
-                            spaceBetween: 0,
-                            navbar: true,
-                            toolbar: false,
-                            photos : [data.servico[i].urlServico],
-                            type: 'popup'
-                        });
-                        imgZoom = "onclick=myPhotoBrowserServicos.open();";
+                $("#butverresultadoenquetes").attr("onclick","enquetesresultado(\'"+id+"\')");
+            
 
-                if (data.servico[i].urlServico!="images/sem_foto_icone.jpg") {
-                    imgServico = '<div class="card-content-cont"><i '+imgZoom+' class="fa fa-search-plus fa-3x"></i>'+
-                                                '<img src="'+data.servico[i].urlServico+'" '+imgZoom+' width="100%">'+
-                                            '</div>';
+                if (data.enquetes.javotou==1) {
+                    $("#butinserirrespenquetes").attr("disabled","disabled");
+                    $("#butinserirrespenquetes").html("VOCÊ JÁ PARTICIPOU!");
+                }else{
+                    $("#butinserirrespenquetes").removeAttr("disabled","disabled");
+                    $("#butinserirrespenquetes").html("ENVIAR RESPOSTA");
                 }
-                var condominioNome = "";
-                if (localStorage.getItem("condominioNome")) {
-                    condominioNome = localStorage.getItem("condominioNome");
-                }else if (localStorage.getItem("sindicoCondominioNome")){
-                    condominioNome = localStorage.getItem("sindicoCondominioNome");
-                }else if (localStorage.getItem("administradoraCondominioNome")) {
-                    condominioNome = localStorage.getItem("administradoraCondominioNome");
-                }
-                dataservico += '<li>'+
-                                        '<div class="card-cont ks-facebook-card">'+ imgServico +
-                                            '<div class="card-header">'+
-                                                '<div class="ks-facebook-avatar">'+
-                                                    '<img src="'+data.servico[i].urlSindico+'" width="34">'+
+                var dataenquetes = "";
+                var datafim = "";
+                var qtd = data.enquetes.enqueteop.length;
+                    if (data.enquetes.dataEnqueteFim!="00/00/0000 ") {
+                        datafim = '<div class="ks-facebook-date"> Prazo final: '+data.enquetes.dataEnqueteFim+'</div>';
+                    }else{
+                        datafim = "";
+                    }
+
+                    dataenquetes += '<li>'+
+                                            '<div class="card-cont ks-facebook-card">'+
+                                                '<div class="card-header">'+
+                                                    '<div class="ks-facebook-avatar">'+
+                                                        '<input type="hidden" id="idenquete" value="'+data.enquetes.idEnquete+'">'+
+                                                        '<img src="images/enquete_icone.png" width="34">'+
+                                                    '</div>'+
+                                                    '<div class="ks-facebook-name">'+data.enquetes.perguntaEnquete+'</div>'+
+                                                    datafim+
                                                 '</div>'+
-                                                '<div class="ks-facebook-name">'+data.servico[i].nameSindico+'</div>'+
-                                                '<div class="ks-facebook-date">Condomínio: '+condominioNome+'</div>'+
                                             '</div>'+
-                                            '<div class="card-content-inner">'+
-                                                '<p class="facebook-title">'+data.servico[i].tituloServico+'</p>'+
-                                                '<p class="item-text">'+data.servico[i].descricaoServico+'</p>'+
-                                                '<div class="facebook-date">Fone: '+data.servico[i].phoneServico+'</div>'+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</li>';
-                    imgServico = "";
-                $('#servicocont-cont').html(dataservico);
-                $('.tel-anuncio').attr('onclick','openURL("tel:'+trimespaco(data.servico[i].phoneServico)+'")');
-                }
+                                        '</li>';
+
+                    for (var i = 0; i < qtd; i++) {
+                        
+                        dataenquetes += '<li>'+
+                                            '<label class="label-radio label-radio-visitante-per item-content">'+
+                                              '<input type="radio" name="respenquete" id="respenquete" value="'+data.enquetes.enqueteop[i].idEnqueteOp+'">'+
+                                              '<div class="item-media item-media-visitante">'+
+                                                '<i class="icon icon-form-radio"></i>'+
+                                              '</div>'+
+                                              '<div class="item-inner">'+
+                                                '<div class="item-title item-title-visitante">'+data.enquetes.enqueteop[i].nomeEnqueteOpcoes+'</div>'+
+                                              '</div>'+
+                                            '</label>'+
+                                        '</li>';
+                    }
+                    $('#enquetescont-cont').html(dataenquetes);
             
             },error: function(data) {
                 myApp.hideIndicator();
@@ -4372,90 +4390,158 @@ function enquetecont(id){
     //alert("Entrei");
 }
 
-///////////////////////////// camera servico ///////////////////////////
-
-function cameraEnquete() {
-// Take picture using device camera and retrieve image as base64-encoded string
-    navigator.camera.getPicture(onSuccessEnquete, onFailEnquete, {
-    quality: 80,
-    allowEdit : true,
-    targetWidth: 1500,
-    correctOrientation: true,
-    destinationType: Camera.DestinationType.DATA_URL,
-    saveToPhotoAlbum: true
-    });
-}
-
- 
-function cameraFileEnquete(source) {
-// Retrieve image file location from specified source
-    navigator.camera.getPicture(onSuccessEnquete, onFailEnquete, {
-    quality: 50,
-    allowEdit: true,
-    targetWidth: 1000,
-    destinationType: Camera.DestinationType.DATA_URL,
-    sourceType: Camera.PictureSourceType.PHOTOLIBRARY
-    });
-}
-// Called if something bad happens.
-//
-function onSuccessEnquete(imageData) {
-    var image = document.getElementById('preview-servico');
-    image.src = "data:image/jpeg;base64," + imageData;
-}
-function onFailEnquete(message) {
-//alert('Failed because: ' + message);
-}
-
-///////////////////////////// camera servico options ///////////////////////////
-
-/* ===== Action sheet, we use it on few pages ===== */
-myApp.onPageInit('inserirenquete', function (page) {
-    var actionOptionCameraServico = [
-        // First buttons group
-        [
-            // Group Label
-            {
-                text: 'Selecione uma opção',
-                label: true
-            },
-            // First button
-            {
-                text: 'Câmera',
-                onClick: function () {
-                    cameraServico();
-                }
-            },
-            // Second button
-            {
-                text: 'Galeria',
-                onClick: function () {
-                    cameraFileServico();
-                }
-            },
-        ],
-        // Second group
-        [
-            {
-                text: 'Cancel',
-                color: 'red'
-            }
-        ]
-    ];
-    $$('.optionCameraServico').on('click', function (e) {
-        // We need to pass additional target parameter (this) for popover
-        myApp.actions(actionOptionCameraServico);
-    });
-    
-});
-
-///////////////////////////// acao inserir servico ///////////////////////////
-$('#butinserenquete').on('click', function(){
+///////////////////////////// acao inserir enquete ///////////////////////////
+$('#butinserirrespenquetes').on('click', function(){
     //alert("enviar");
 
-    if (($$('#txttitenquete').val()!="") && ($$('#txtdescricaoenquete').val()!="") && ($$('#txtphoneenquete').val()!="")) {
+    if ($('#respenquete:checked').val()) {
 
-            enviarservico();
+            enviarrespostaenquetes();
+
+    }else{
+        myApp.alert('Selecione uma opção');    
+    }
+
+});
+
+///////////////////////////// enviar resposta enquete ///////////////////////////
+function enviarrespostaenquetes()
+{
+ 
+ //alert("entrei");
+        $$idmorador = localStorage.getItem("moradorIdmorador");
+        $$idenquete = $$('#idenquete').val();
+        $$idenqueteopcoes = $('#respenquete:checked').val();
+
+
+        $('#forminserirenquetes').each (function(){
+          this.reset();
+        });
+
+        myApp.showIndicator();
+        
+        $.ajax($server+'functionAppEnquete.php?', {
+            type: "post",
+            data: "idmorador="+$$idmorador+"&idenquete="+$$idenquete+"&idenqueteopcoes="+$$idenqueteopcoes+"&action=addVoto",
+        })
+          .fail(function() {
+            myApp.hideIndicator();
+            myApp.alert('Erro! Tente novamente.');
+          })     
+          .done(function(data) {
+            if (data=="ok") {
+                myApp.hideIndicator();
+                myApp.alert('Resposta inserida com sucesso!', function () { mainView.router.load({pageName: 'enquetesresultado'}); enquetesresultado($$idenquete);});
+            }else if(data=="not"){
+                myApp.hideIndicator();
+                myApp.alert('Ops! Você já participou.', function () { mainView.router.back();});
+            }else{
+                myApp.hideIndicator();
+                myApp.alert('Erro! Tente novamente.');
+            }
+          });
+}
+
+///////////////////////////////////// enquete resultado ///////////////////////////
+function enquetesresultado(id){
+
+    myApp.showIndicator();
+    //var dataservico;
+    $('#enquetesresultado-cont').html("");
+    //$('#idenquete').val("");
+        $.ajax({
+            url: $server+"functionAppEnquete.php?idenquete="+id+"&action=listresult",
+            dataType : "json",
+            success: function(data) {
+            myApp.hideIndicator();
+
+                var dataenquetes = "";
+                var datafim = "";
+                var qtd = data.enquetes.enqueteop.length;
+                var auxTotal;
+                var totalvotos;
+                var colorOp = "";
+                    
+                    if (data.enquetes.dataEnqueteFim!="00/00/0000 ") {
+                        datafim = '<div class="ks-facebook-date"> Prazo final: '+data.enquetes.dataEnqueteFim+'</div>';
+                    }else{
+                        datafim = "";
+                    }
+
+                    dataenquetes += '<li>'+
+                                            '<div class="card-cont ks-facebook-card">'+
+                                                '<div class="card-header">'+
+                                                    '<div class="ks-facebook-avatar">'+
+                                                        '<img src="images/enquete_icone.png" width="34">'+
+                                                    '</div>'+
+                                                    '<div class="ks-facebook-name">'+data.enquetes.perguntaEnquete+'</div>'+
+                                                    datafim+
+                                                '</div>'+
+                                            '</div>'+
+                                        '</li>';
+
+                    for (var i = 0; i < qtd; i++) {
+                        if (data.enquetes.totalVotos!=0) {
+                            auxTotal = (data.enquetes.enqueteop[i].countVotos / data.enquetes.totalVotos) * 100;
+                            totalvotos = data.enquetes.totalVotos;
+                        }else{
+                            auxTotal = 0;
+                            totalvotos = 0;
+                        }
+                        //console.log("auxTotal = "+auxTotal);
+                        if (auxTotal==0) {
+                            stylepercent = "display: none;"
+                        }else{
+                            stylepercent = "width: calc("+auxTotal.toFixed(0)+"% - 40px);"
+                        }
+                        if (i == 0) {
+                            colorOp = "bg-deeporange";
+                        }
+                        if (i == 1) {
+                            colorOp = "bg-lightgreen";
+                        }
+                        if (i == 2) {
+                            colorOp = "bg-amber";
+                        }
+                        if (i == 3) {
+                            colorOp = "bg-purple";
+                        }
+                        if (i == 4) {
+                            colorOp = "bg-brown";
+                        }
+                        dataenquetes += '<li>'+
+                                            '<label class="label-radio label-radio-enquete item-content bg-blue">'+
+                                              '<div class="item-media item-media-enquete">'+auxTotal.toFixed(0)+'%</div>'+
+                                              '<div class="item-inner bg-enquetes-votos">'+
+                                                '<div class="item-title item-title-visitante">'+data.enquetes.enqueteop[i].nomeEnqueteOpcoes+'</div>'+
+                                              '</div>'+
+                                              '<div class="item-inner enquetes-votos-percente '+colorOp+'" style="'+stylepercent+'"></div>'+
+                                            '</label>'+
+                                        '</li>';
+                    }
+                        dataenquetes += '<li>'+
+                                            '<label class="label-radio label-radio-enquete item-content">'+
+                                              '<div class="item-inner">'+
+                                                '<div class="item-title item-title-visitante total-votos">Total de votos = '+totalvotos+'</div>'+
+                                              '</div>'+
+                                            '</label>'+
+                                        '</li>';
+                    $('#enquetesresultado-cont').html(dataenquetes);
+            },error: function(data) {
+                myApp.hideIndicator();
+                myApp.alert('Erro! Tente novamente.', function () { mainView.router.back();});
+            }
+        });
+    //alert("Entrei");
+}
+
+///////////////////////////// acao inserir enquete ///////////////////////////
+$('#butinserirenquetes').on('click', function(){
+    //alert("enviar");
+
+    if (($$('#txtdatainicioenquetes').val()!="") && ($$('#txttitenquetes').val()!="") && ($$('#txtresp1').val()!="")) {
+
+            enviarenquetes();
 
     }else{
         myApp.alert('Preencha todos os campos.');    
@@ -4464,31 +4550,30 @@ $('#butinserenquete').on('click', function(){
 });
 
 ///////////////////////////// inserir enquete ///////////////////////////
-function enviarenquete()
+function enviarenquetes()
 {
  
  //alert("entrei");
-        imagem = $('#preview-servico').attr("src");
         $$idcondominio = localStorage.getItem("condominioId");
-        $$idbloco = localStorage.getItem("moradorIdbloco");
         $$idsindico = localStorage.getItem("sindicoIdsindico");
-        $$txtTitulo = $$('#txttitservico').val();
-        $$txtDescricao = $$('#txtdescricaoservico').val();
-        $$txtPhone = $$('#txtphoneservico').val();
-        //$$fileUpload = dataURL;
-        //$$fileUpload = "fterte";
-        //myApp.showPreloader();
+        $$datainicio = $$('#txtdatainicioenquetes').val();
+        $$datafim = $$('#txtdatafimenquetes').val();
+        $$txtTitulo = $$('#txttitenquetes').val();
+        $$txtresp1 = $$('#txtresp1').val();
+        $$txtresp2 = $$('#txtresp2').val();
+        $$txtresp3 = $$('#txtresp3').val();
+        $$txtresp4 = $$('#txtresp4').val();
+        $$txtresp5 = $$('#txtresp5').val();
 
-        $('#forminserirservico').each (function(){
+        $('#forminserirenquetes').each (function(){
           this.reset();
         });
-        $("#preview-servico").attr('src',"");
 
         myApp.showIndicator();
-        // Salvando imagem no servidor
+        
         $.ajax($server+'functionAppEnquete.php?', {
             type: "post",
-            data: "imagem="+imagem+"&idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&idbloco="+$$idbloco+"&txtTitulo="+$$txtTitulo+"&txtPhone="+$$txtPhone+"&txtDescricao="+$$txtDescricao+"&action=add",
+            data: "idsindico="+$$idsindico+"&idcondominio="+$$idcondominio+"&datainicio="+$$datainicio+"&datafim="+$$datafim+"&txtTitulo="+$$txtTitulo+"&txtresp1="+$$txtresp1+"&txtresp2="+$$txtresp2+"&txtresp3="+$$txtresp3+"&txtresp4="+$$txtresp4+"&txtresp5="+$$txtresp5+"&apiKey="+$apiKey+"&action=add",
         })
           .fail(function() {
             myApp.hideIndicator();
@@ -4500,7 +4585,7 @@ function enviarenquete()
                 myApp.alert('Erro! Tente novamente.');
             } else {
                 myApp.hideIndicator();
-                myApp.alert('Serviço inserido com sucesso!', function () { mainView.router.load({pageName: 'servico'}); servico();});
+                myApp.alert('Enquete inserida com sucesso!', function () { mainView.router.load({pageName: 'enquetes'}); enquetes();});
             }
           });
 }
@@ -7949,16 +8034,16 @@ function comunportariahome(alvo){
                         $.each(listitems, function(idx, itm) { mylist.append(itm); });  
                     }
 
-                    setTimeout(comunportariahome, 5000);
+                    //setTimeout(comunportariahome, 5000);
                 }else{
 
                     $('#comunportariahome-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                    setTimeout(comunportariahome, 5000);
+                    //setTimeout(comunportariahome, 5000);
                 }            
             },error: function(data) {
 
                 $('#comunportariahome-cont').html("<li class='semregistro'>Nenhum registro cadastrado</li>");
-                    setTimeout(comunportariahome, 5000);
+                    //setTimeout(comunportariahome, 5000);
             }
         });
     //alert("Entrei");
@@ -11821,7 +11906,7 @@ function limpar()
         document.addEventListener('app.Ready', onDeviceReady, true);
         function onDeviceReady() {
 
-            window.ga.startTrackerWithId("UA-121902721-1", 10);
+            //window.ga.startTrackerWithId("UA-121902721-1", 10);
 
 
             function TrackButtonClicked() {
@@ -11889,7 +11974,7 @@ function limpar()
                             visitantealerthome();
                         break;
 
-                        case 'visitanteportaria':
+                        case 'searchhomeportaria':
                             searchhomeportaria();
                         break;
                     }
@@ -11971,6 +12056,11 @@ function limpar()
                                 mainView.router.load({pageName: 'alertaportariahomecont'});
                                 alertaportariacont(data.additionalData.id,true);
                                 break;
+
+                                case 'enquete':
+                                mainView.router.load({pageName: 'enquetescont'});
+                                enquetescont(data.additionalData.id,true);
+                                break;
                             }
                         }
                     });
@@ -12017,6 +12107,11 @@ function limpar()
                                 mainView.router.load({pageName: 'alertaportariahomecont'});
                                 alertaportariacont(data.additionalData.id,true);
                                 break;
+
+                                case 'enquete':
+                                mainView.router.load({pageName: 'enquetescont'});
+                                enquetescont(data.additionalData.id,true);
+                                break;
                             }
 
                         console.log('CAPTURADO PUSH COM APP EM COLDSTART!');
@@ -12060,6 +12155,11 @@ function limpar()
                                 case 'alertaportaria':
                                 mainView.router.load({pageName: 'alertaportariahomecont'});
                                 alertaportariacont(data.additionalData.id,true);
+                                break;
+
+                                case 'enquete':
+                                mainView.router.load({pageName: 'enquetescont'});
+                                enquetescont(data.additionalData.id,true);
                                 break;
                             }
                         console.log('CAPTURADO PUSH COM APP EM BACKGROUND!');  
