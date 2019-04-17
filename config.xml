@@ -52,7 +52,7 @@
     <string>Precisamos de acesso a galeria para salvar as fotos de aberturas de ocorrências</string>
 </edit-config>
 
-<config-file target="*-Info.plist" platform="ios" parent="NSPhotoLibraryUsageDescription" overwrite="true">  
+<config-file target="*-Info.plist" platform="ios" parent="NSPhotoLibraryUsageDescription" mode="merge">  
       <string>Usamos a galeria para envio de fotos nas aberturas de ocorrências</string> 
 </config-file>
 
